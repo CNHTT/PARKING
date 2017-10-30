@@ -1,4 +1,4 @@
-<%--
+<%@ page import="static com.extra.utils.DataUtils.isEmpty" %><%--
   Created by IntelliJ IDEA.
   User: Extra
   Date: 2017/10/26
@@ -8,7 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
-    String result= ":";
+    String result=(String) request.getAttribute("error");
+    if (isEmpty(result)) result="";
 %>
 <html>
 <head>
@@ -29,7 +30,7 @@
     <div id="loginform" class="loginBox">
 
         <div class="loginHint" id="loginHint"><%=result%></div>
-        <form class="form form-horizontal" action="index.html" onsubmit=" return checkLogin()" method="post">
+        <form class="form form-horizontal" action="signin"  onsubmit=" return checkLogin()" method="post">
             <div class="row cl">
                 <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
                 <div class="formControls col-xs-8">

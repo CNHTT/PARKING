@@ -11,8 +11,8 @@
 
     <select id="selectManagerBySignIn" resultMap="ManagerBaseMap">
         SELECT  ID,USER_NAME,USER_PHONE,USER_EMAIL,UUID  FROM park_manager
-        WHERE (USER_NAME = #{nameOrEmail} OR USER_EMAIL = #{nameOrEmail})
-        AND  USER_PWD = #{password} AND IS_DELETE=1
+        WHERE (USER_NAME = #{username} OR USER_EMAIL = #{username})
+        AND  USER_PWD = #{pwd} AND IS_DELETE=1
     </select>
 
 </mapper>
