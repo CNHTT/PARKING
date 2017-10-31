@@ -26,7 +26,16 @@ public class ManagerBean implements Serializable {
     private String uniqueNumber;
 
     private String UUID;
+    private String companyUUID;
 
+
+    public String getCompanyUUID() {
+        return companyUUID;
+    }
+
+    public void setCompanyUUID(String companyUUID) {
+        this.companyUUID = companyUUID;
+    }
 
     public Long getId() {
         return id;

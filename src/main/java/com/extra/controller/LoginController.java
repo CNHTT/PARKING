@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import static com.extra.utils.DataUtils.isEmpty;
 import static com.extra.utils.DataUtils.isNullString;
 import static com.extra.utils.RegexUtils.isCheckPassWord;
+import static com.extra.utils.SessionUtils.SESSION_MANAGER;
 
 /**
  * Created by Extra on 2017/10/27.
@@ -39,8 +40,7 @@ public class LoginController extends BaseController {
 
     @RequestMapping("/signout")
     private  String signOut(HttpSession session){
-        session.setAttribute("id",null);
-        session.setAttribute(SessionUtils.SESSION_ADMIN_USER,null);
+        session.setAttribute(SESSION_MANAGER,null);
         return "redirect:login";
     }
 
@@ -59,6 +59,7 @@ public class LoginController extends BaseController {
             req.setAttribute("error","The user does not exist! Please check the");
             return "forward:login";
         }else {
+            session.setAttribute(SESSION_MANAGER,managerBean);
             return "redirect:index";
         }
     }

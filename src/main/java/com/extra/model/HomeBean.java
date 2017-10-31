@@ -3,6 +3,7 @@ package com.extra.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Extra on 2017/10/30.
@@ -14,6 +15,17 @@ public class HomeBean {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date time;
     private String ip;
+
+
+    private List<StatisticsBean> list;
+
+    public List<StatisticsBean> getList() {
+        return list;
+    }
+
+    public void setList(List<StatisticsBean> list) {
+        this.list = list;
+    }
 
     public int getLoginNum() {
         return loginNum;

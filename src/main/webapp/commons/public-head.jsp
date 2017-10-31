@@ -20,7 +20,7 @@
 <link rel="stylesheet" type="text/css" href="../../static/css/ui.min.css"/>
 <link rel="stylesheet" type="text/css" href="../../static/css/ui.admin.css"/>
 <link rel="stylesheet" type="text/css" href="../../static/fonts/icon/iconfont.css"/>
-<link rel="stylesheet" type="text/css" href="../../static/css/skin/default/skin.css"/>
+<link rel="stylesheet" type="text/css" href="../../static/css/skin/default/skin.css" id="skin" />
 <link rel="stylesheet" type="text/css" href="../../static/css/style.css"/>
 
 <!--[if IE 6]>

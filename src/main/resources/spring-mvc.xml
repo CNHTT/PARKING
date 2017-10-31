@@ -26,25 +26,16 @@
     <mvc:resources mapping="/fonts/**" location="/static/fonts/"/>
     <mvc:default-servlet-handler/>
 
-    <!-- 访问拦截  -->
-    <!--<mvc:interceptors>-->
-    <!--<mvc:interceptor>-->
-    <!--<mvc:mapping path="/**/**"/>-->
-    <!--<bean class="cn.acheng1314.intercepter.LoginHandlerInterceptor"/>-->
-    <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/**"/>-->
-            <!--<mvc:exclude-mapping path="/static/**"/>-->
-            <!--<mvc:exclude-mapping path="/user/register"/>-->
-            <!--<mvc:exclude-mapping path="/user/*.do"/>-->
-            <!--<mvc:exclude-mapping path="/operator/*.mp"/>-->
-            <!--<mvc:exclude-mapping path="/order/*"/>-->
-            <!--<mvc:exclude-mapping path="/printer/*"/>-->
-            <!--<bean class="com.extra.interceptor.CommonInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/static/**"/>
+            <bean class="com.extra.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
     <!-- 处理静态资源 -->
     <mvc:default-servlet-handler/>
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >

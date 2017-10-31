@@ -139,7 +139,7 @@ function creatIframe(href,titleName){
 	iframeBox.hide();
 	iframe_box.append('<div class="show_iframe"><div class="loading"></div><iframe frameborder="0" src='+href+'></iframe></div>');
 	var showBox=iframe_box.find('.show_iframe:visible');
-	showBox.find('iframe').load(function(){
+	showBox.find('iframe').on('load',function(){
 		showBox.find('.loading').hide();
 	});
 }

@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.extra.model.ManagerBean" %>
+<%@ page import="static com.extra.utils.SessionUtils.SESSION_MANAGER" %><%--
   Created by IntelliJ IDEA.
   User: Extra
   Date: 2017/10/26
@@ -8,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
+    ManagerBean managerBean = (ManagerBean) request.getSession().getAttribute(SESSION_MANAGER);
 %>
 <html>
 
@@ -23,7 +25,7 @@
             <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
             <nav class="nav navbar-nav">
                 <ul class="cl">
-                    <li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
+                    <li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> Added <i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
                             <li><a href="javascript:;" onclick="article_add('t','article-add.html')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
                             <li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
@@ -35,13 +37,13 @@
             </nav>
             <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
                 <ul class="cl">
-                    <li>超级管理员</li>
+                    <li>Super administrator</li>
                     <li class="dropDown dropDown_hover">
-                        <a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+                        <a href="#" class="dropDown_A"><%=managerBean.getUserName()%> <i class="Hui-iconfont">&#xe6d5;</i></a>
                         <ul class="dropDown-menu menu radius box-shadow">
-                            <li><a onclick="myselfinfo()">个人信息</a></li>
-                            <li><a href="#">切换账户</a></li>
-                            <li><a href="signout">退出</a></li>
+                            <li><a onclick="myselfinfo()">Personal information</a></li>
+                            <li><a href="signout">Switch accounts</a></li>
+                            <li><a href="signout">Sign out</a></li>
                         </ul>
                     </li>
                     <li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
@@ -100,10 +102,10 @@
             </dd>
         </dl>
         <dl id="menu-product">
-            <dt><i class="Hui-iconfont">&#xe6c6;</i> 停车场管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dt><i class="Hui-iconfont">&#xe6c6;</i> PLM<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="parking_management" data-title="停车场管理" href="javascript:;">停车场管理</a></li>
+                    <li><a data-href="parking_management" data-title="PARKING LOT" href="javascript:;">PARKING LOT</a></li>
                 </ul>
             </dd>
         </dl>
@@ -151,7 +153,7 @@
         <div class="Hui-tabNav-wp">
             <ul id="min_title_list" class="acrossTab cl">
                 <li class="active">
-                    <span title="我的桌面" data-href="welcome">我的桌面</span>
+                    <span title="Home" data-href="welcome">Home</span>
                     <em></em></li>
             </ul>
         </div>
