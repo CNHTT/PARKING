@@ -40,6 +40,11 @@ public class ParkingController extends  BaseController {
 
 
 
+    @RequestMapping("parking_lot_add")
+    public  String toParkingLotAddJsp(){return "parking-lot-add";}
+
+
+
 
 
 }
