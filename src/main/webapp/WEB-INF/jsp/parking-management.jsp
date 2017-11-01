@@ -38,26 +38,26 @@
     </div>
 
     <div class="mt-20">
-        <table class="table table-border table-bordered table-bg table-hover table-sort">
+        <table id="parking_lot_list"  class="table table-border table-bordered table-bg table-hover table-sort">
             <thead>
               <tr class="text-c">
-                  <th>ID</th>
+                  <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
                   <th>Parking lot number</th>
                   <th>Parking lot name</th>
                   <th>Parking address</th>
                   <th>Parking lot telephone</th>
                   <th>Parking lot leader</th>
-                  <th>parking spaces</th>
+                  <th>Parking spaces</th>
                   <th>Parking lot status</th>
-                  <th>operate</th>
+                  <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}"></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody  id="tableBody">
 
-              </tr>
             </tbody>
         </table>
+        <div class="page-container text-c" id="lot_page">
+        </div>
     </div>
 </div>
 
@@ -68,8 +68,76 @@
 <script type="text/javascript" src="<%=path%>/static/layui/layui.js"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
-    //https://cdn.datatables.net/
-    //https://datatables.net/release-datatables/examples/api/select_single_row.html
+
+    var  selectpage;
+    var  selectNumber;
+
+
+
+
+    function loadParkingLotList(pageName,limitName,timeMin,timeMax,parkingLotName) {
+        var url = "parkingLot/list";
+        var  reqPara={"pageName":pageName,"limitName":limitName,"timeMin":timeMin,"timeMax":timeMax,"parkingLotName":parkingLotName};
+        $(function () {
+            $.ajax({
+                type:"post",
+                url:url,
+                data:reqPara,
+                async:true,
+                dataType:"json",
+                success:function (data) {
+                    if (data.code == 1){
+                        var  dataList = data.data.dataList;
+                        layui.use('laypage',function () {
+                            var laypage =layui.laypage;
+                            //执行实例
+                            laypage.render({
+                                elem:'lot_page',
+                                count:data.data.pages,
+                                layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+                                jump:function (obj, first) {
+
+                                    console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                                    console.log(obj.limit); //得到每页显示的条数
+
+                                }
+                            });
+                            $("#tableBody").empty();
+                            if (dataList.length>0){
+
+                                var  id=1;
+                                $(dataList).each(function () {
+                                    var stastsHtml = this.status==1?'<td class="td-status"><span class="label label-success radius">Normal </span></td>':'<span class="label label-danger radius">abnormal</span>';
+                                    var html =
+                                        '<tr  class="text-c">'+
+                                            '<td>' +  (id++) + '</td>'+
+                                            '<td>' +  this.number + '</td>'+
+                                            '<td>' +  this.name + '</td>'+
+                                            '<td>' +  this.address + '</td>'+
+                                            '<td>' +  this.contactNumber + '</td>'+
+                                            '<td>' +  this.area +"㎡"+ '</td>'+
+                                            '<td>' +  this.quantity + '</td>'+
+                                            stastsHtml+
+                                           '<td class="td-manage">' +
+                                        '<a style="text-decoration:none"   title="stop"><i class="Hui-iconfont">&#xe6de;</i></a> <a style="text-decoration:none" class="ml-5" title="edit"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" title="del"><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
+                                        $("#tableBody").append(html);
+                                });
+                            }else {
+
+                            }
+                        });
+                    }
+                }
+            });
+        })
+
+    }
+
+
+    $(function () {
+       loadParkingLotList(1,10,"","","");
+    });
+
     layui.use('laydate', function(){
         var laydate = layui.laydate;
         //国际版
@@ -88,7 +156,8 @@
         var index = layer.open({
             type:2,
             title:obj,
-            content:url
+            content:url,
+            lang:'en'
         });
         layer.full(index)
     }

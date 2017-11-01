@@ -1,0 +1,13 @@
+package com.extra.service;
+
+import com.extra.model.ParkingLotBean;
+import com.extra.model.response.ResponsePage;
+
+/**
+ * Created by Extra on 2017/11/1.
+ * GitHub cnhttt@163.com
+ * Work to SZFP
+ */
+public interface ParkingService {
+    ResponsePage<ParkingLotBean> loadParkingLotList(String companyUUID, Integer pageName, Integer limitName);
+}

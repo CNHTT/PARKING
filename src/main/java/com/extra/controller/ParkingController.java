@@ -1,7 +1,17 @@
 package com.extra.controller;
 
+import com.extra.model.ManagerBean;
+import com.extra.model.ParkingLotBean;
+import com.extra.model.response.ResponsePage;
+import com.extra.service.ParkingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import static com.extra.utils.SessionUtils.SESSION_MANAGER;
 
 /**
  * Created by Extra on 2017/10/30.
@@ -10,6 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class ParkingController extends  BaseController {
+
+
+    @Resource
+    private ParkingService parkingService;
+
+
 
     @RequestMapping("parking_records")
     public  String parkingRecords(){
@@ -44,6 +60,22 @@ public class ParkingController extends  BaseController {
     public  String toParkingLotAddJsp(){return "parking-lot-add";}
 
 
+
+    @RequestMapping(value ="parkingLot/list" )
+    @ResponseBody
+    public String getParkingLotList(Integer pageName,Integer limitName,HttpServletRequest req){
+
+        try {
+            ManagerBean managerBean = (ManagerBean) req.getSession().getAttribute(SESSION_MANAGER);
+            log.info("分页查询ParkingLotList信息"+managerBean.getUserName());
+            if (managerBean==null)return responseFail("No");
+            ResponsePage<ParkingLotBean> responsePage =
+                    parkingService.loadParkingLotList(managerBean.getCompanyUUID(),pageName,limitName);
+            return responseResult(responsePage);
+        }catch (Exception e){
+            return responseFail(e.toString());
+        }
+    }
 
 
 
