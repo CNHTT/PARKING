@@ -10,4 +10,6 @@ import com.extra.model.response.ResponsePage;
  */
 public interface ParkingService {
     ResponsePage<ParkingLotBean> loadParkingLotList(String companyUUID, Integer pageName, Integer limitName);
+    int getTotalNumber(String companyUuid);
+    boolean addParkingLot(ParkingLotBean lotBean);
 }

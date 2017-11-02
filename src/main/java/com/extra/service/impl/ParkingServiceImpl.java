@@ -30,4 +30,16 @@ public class ParkingServiceImpl implements ParkingService {
         PageHelper.startPage(pageName,limitName);
         return BeanUtils.toResponseResult(parkingDao.selectParkingLotList(companyUUID));
     }
+
+    @Override
+    public int getTotalNumber(String companyUuid) {
+        return parkingDao.selectParkingLotCount(companyUuid);
+    }
+
+    @Override
+    public boolean addParkingLot(ParkingLotBean lotBean) {
+        if (parkingDao.insertParkingLot(lotBean) ==0)
+        return false;
+        return true;
+    }
 }

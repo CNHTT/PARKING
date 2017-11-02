@@ -4,6 +4,7 @@ import com.extra.model.ManagerBean;
 import com.extra.model.ParkingLotBean;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.ParkingService;
+import com.extra.utils.TimeUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -76,7 +77,22 @@ public class ParkingController extends  BaseController {
             return responseFail(e.toString());
         }
     }
+@RequestMapping(value = "addParkingLot")
+    public String addParkingLot(ParkingLotBean lotBean,HttpServletRequest req){
+        ManagerBean managerBean = (ManagerBean) req.getSession().getAttribute(SESSION_MANAGER);
+        log.info(lotBean.toString());
+        String number = TimeUtils.getUniqueNumber( parkingService.getTotalNumber(managerBean.getCompanyUUID()));
+        lotBean.setNumber(number);
+        lotBean.setUuid(TimeUtils.getUUID());
+        lotBean.setCompanyUuid(managerBean.getCompanyUUID());
+        lotBean.setAddMangerUuid(managerBean.getUUID());
+        if (parkingService.addParkingLot(lotBean))
+        return  "redirect:success";
+        return "redirect:parking_lot_add";
+    }
 
 
+    @RequestMapping("success")
+    public String success(){return "add-success";}
 
 }

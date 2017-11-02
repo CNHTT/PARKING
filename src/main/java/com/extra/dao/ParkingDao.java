@@ -13,4 +13,8 @@ import java.util.ArrayList;
 @Repository
 public interface ParkingDao {
     ArrayList<ParkingLotBean> selectParkingLotList(String companyUUID);
+
+    int selectParkingLotCount(String companyUuid);
+
+    int insertParkingLot(ParkingLotBean lotBean);
 }

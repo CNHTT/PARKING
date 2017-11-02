@@ -7,4 +7,18 @@
         WHERE companyUuid = #{companyUUID}
     </select>
 
+
+    <select id="selectParkingLotCount" parameterType="java.lang.String" resultType="java.lang.Integer" >
+        SELECT count(*) FROM  parking_lot WHERE  companyUuid = #{companyUuid}
+    </select>
+
+
+    <insert id="insertParkingLot" parameterType="com.extra.model.ParkingLotBean">
+        <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT  LAST_INSERT_ID()
+        </selectKey>
+        INSERT  INTO  parking_lot(name,number,company,address,entryAddress,principal,contactNumber,area,quantity,uuid,companyUuid,addMangerUuid)
+        VALUES (#{name},#{number},#{company},#{address},#{entryAddress},#{principal},#{contactNumber},#{area},#{quantity},#{uuid},#{companyUuid},#{addMangerUuid})
+    </insert>
+
 </mapper>

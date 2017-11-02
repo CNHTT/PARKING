@@ -178,4 +178,27 @@ public class ParkingLotBean {
     public void setModifyTime(Date modifyTime) {
         this.modifyTime = modifyTime;
     }
+
+
+    @Override
+    public String toString() {
+        return "ParkingLotBean{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", number='" + number + '\'' +
+                ", company='" + company + '\'' +
+                ", address='" + address + '\'' +
+                ", entryAddress='" + entryAddress + '\'' +
+                ", principal='" + principal + '\'' +
+                ", contactNumber='" + contactNumber + '\'' +
+                ", area='" + area + '\'' +
+                ", quantity='" + quantity + '\'' +
+                ", uuid='" + uuid + '\'' +
+                ", companyUuid='" + companyUuid + '\'' +
+                ", addMangerUuid='" + addMangerUuid + '\'' +
+                ", status=" + status +
+                ", createTime=" + createTime +
+                ", modifyTime=" + modifyTime +
+                '}';
+    }
 }

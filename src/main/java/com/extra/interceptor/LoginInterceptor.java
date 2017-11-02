@@ -42,7 +42,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         log.info("url:"+url);
         ManagerBean managerBean = (ManagerBean) request.getSession().getAttribute(SESSION_MANAGER);
         if(managerBean == null){
-            log.info("==============执行顺序: 1、preHandle================");
             response.sendRedirect("/login");
             return false;
         }else
@@ -51,13 +50,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        log.info("==============执行顺序: 2、postHandle================");
         super.postHandle(request, response, handler, modelAndView);
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        log.info("==============执行顺序: 3、afterCompletion================");
         super.afterCompletion(request, response, handler, ex);
     }
 }

@@ -12,7 +12,7 @@
 <html>
 <head>
     <jsp:include page="/commons/public-head.jsp"/>
-    <link rel="stylesheet" href="../../static/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="<%=path%>/static/layui/css/layui.css"  media="all">
     <title>PARKING LOT</title>
 </head>
 <body>
@@ -63,10 +63,8 @@
 
 
 
-<!--public footer-->
 <jsp:include page="/commons/public-footer.jsp"/>
 <script type="text/javascript" src="<%=path%>/static/layui/layui.js"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
 
     var  selectpage;
@@ -153,13 +151,15 @@
 
 
     function parkingLot_add (obj,url) {
-        var index = layer.open({
+       layer.open({
             type:2,
+           area: ['700px', '450px'],
             title:obj,
+           fixed: false, //不固定
             content:url,
+           maxmin: true,
             lang:'en'
         });
-        layer.full(index)
     }
 </script>
 </body>

@@ -228,11 +228,10 @@ public class TimeUtils {
         return format.format(new Date(milliseconds));
     }
     public static String getUniqueNumber(int uID) {
-        String  result = date2String(new Date(),DEFAULT_MDY);
-        int length = 4;
+        int length =5;
         String codeFormat ="%0"+String.valueOf(length)+"d";
-        String UID = String.format(codeFormat,(uID+1));
-        return result+UID;
+        return  String.format(codeFormat,(uID+1));
+
     }
 
 
