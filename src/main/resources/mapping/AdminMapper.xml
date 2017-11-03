@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.extra.dao.AdminDao">
+    <resultMap id="AdminMap" type="com.extra.model.ManagerBean">
+        <id column="ID" property="id" jdbcType="BIGINT"/>
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+        <result column="USER_PHONE" property="userPhone" jdbcType="VARCHAR"/>
+        <result column="USER_EMAIL" property="userEmail" jdbcType="VARCHAR"/>
+        <result column="UUID" property="UUID" jdbcType="VARCHAR"/>
+        <result column="companyUUID" property="companyUUID" jdbcType="VARCHAR"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="parkingLotName" property="parkingLotName" jdbcType="VARCHAR"/>
+        <result column="parkingUuid" property="parkingUuid" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectAdministratorList" resultMap="AdminMap">
+        SELECT  park_manager.ID,USER_NAME,USER_PHONE,USER_EMAIL,park_manager.UUID ,park_manager.companyUUID ,park_manager.number,parkingUuid,CREATE_TIME ,park_manager.status,type,parking_lot.name  AS parkingLotName
+        FROM  park_manager LEFT  OUTER  JOIN  parking_lot ON   park_manager.parkingUuid=parking_lot.uuid
+        WHERE   park_manager.companyUUID = #{companyUuid} AND IS_DELETE=1
+    </select>
+
+</mapper>

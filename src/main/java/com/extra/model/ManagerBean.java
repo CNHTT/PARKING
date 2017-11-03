@@ -25,9 +25,55 @@ public class ManagerBean implements Serializable {
     private String strTime;
     private String uniqueNumber;
 
+    private String parkingLotName;
+    private String parkingUuid;
+
     private String UUID;
     private String companyUUID;
+    private  String number;
+    private int status;
+    private int type;
 
+
+    public String getParkingLotName() {
+        return parkingLotName;
+    }
+
+    public void setParkingLotName(String parkingLotName) {
+        this.parkingLotName = parkingLotName;
+    }
+
+    public String getParkingUuid() {
+        return parkingUuid;
+    }
+
+    public void setParkingUuid(String parkingUuid) {
+        this.parkingUuid = parkingUuid;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
 
     public String getCompanyUUID() {
         return companyUUID;

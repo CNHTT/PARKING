@@ -91,7 +91,7 @@
                             //执行实例
                             laypage.render({
                                 elem:'lot_page',
-                                count:data.data.pages,
+                                count:data.data.total,
                                 layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
                                 jump:function (obj, first) {
 
@@ -153,7 +153,7 @@
     function parkingLot_add (obj,url) {
        layer.open({
             type:2,
-           area: ['700px', '450px'],
+           area: ['700', '450'],
             title:obj,
            fixed: false, //不固定
             content:url,
