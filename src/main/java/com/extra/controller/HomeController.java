@@ -37,11 +37,7 @@ public class HomeController extends BaseController {
     private  String welcome(HttpServletRequest req, ModelMap modelMap){
         HomeBean homeBean = new HomeBean();
         ManagerBean managerBean = (ManagerBean) req.getSession().getAttribute(SESSION_MANAGER);
-        try {
-            homeBean.setIp(NetworkUtil.getIpAddress(req));
-        } catch (IOException e) {
-            homeBean.setIp("999.999.99.99");
-        }
+        homeBean.setIp(NetworkUtil.getIpAddress(req));
         homeBean.setLoginNum(100);
         homeBean.setTime(new Date());
         statisticsList = new ArrayList<>();

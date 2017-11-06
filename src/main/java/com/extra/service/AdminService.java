@@ -11,4 +11,10 @@ import com.extra.model.response.ResponsePage;
  */
 public interface AdminService {
     ResponsePage<ManagerBean> loadParkingLotList(String companyUUID, Integer pageName, Integer limitName);
+
+    int getTotalNumber(String companyUUID);
+
+    boolean addManagerInfo(ManagerBean managerBean);
+
+    ResponsePage<ManagerBean> loadParkingLotListFromName(String companyUUID, Integer pageName, Integer i, String name);
 }

@@ -29,4 +29,22 @@ public class AdminServiceImpl implements AdminService{
         PageHelper.startPage(pageName,limitName);
         return BeanUtils.toResponseResult(adminDao.selectAdministratorList(companyUUID));
     }
+
+    @Override
+    public int getTotalNumber(String companyUUID) {
+        return adminDao.selectManagerCountFromCompany(companyUUID);
+    }
+
+    @Override
+    public boolean addManagerInfo(ManagerBean managerBean) {
+        return adminDao.insertManager(managerBean)!= 0;
+    }
+
+    @Override
+    public ResponsePage<ManagerBean> loadParkingLotListFromName(String companyUUID, Integer pageName, Integer limitName, String name) {
+        pageName    =  pageName ==null?1:pageName;
+        limitName     =  limitName  ==null?10:limitName;
+        PageHelper.startPage(pageName,limitName);
+        return BeanUtils.toResponseResult(adminDao.selectAdministratorListFromName(companyUUID,name));
+    }
 }

@@ -26,7 +26,9 @@
         </form>
 
     </div>
-    <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="admin_add('Add Admin','add/admin','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> Add  Administrator</a></span> <span class="r">Total data：<strong>${adminList.total}</strong> SIZE</span> </div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="l"><a href="javascript:;" onclick="admin_add('Add Admin','add/admin','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> Add  Administrator</a></span>
+        <span class="r">Total data：<strong>${adminList.total}</strong> SIZE</span> </div>
     <table class="table table-border table-bordered table-bg">
         <thead>
         <tr>
@@ -77,7 +79,9 @@
             </c:forEach>
         </c:if >
         <c:if test="${adminList==null}">
-
+            <tr>
+                <th scope="col" colspan="9">No Find Administrator </th>
+            </tr>
         </c:if>
         </tbody>
     </table>

@@ -8,13 +8,13 @@ $(function(){
     jQuery.validator.addMethod("isIntEqZero", function(value, element) { 
          value=parseInt(value);      
          return this.optional(element) || value==0;       
-    }, "整数必须为0"); 
+    }, "Integer must be 0");
       
     // 判断整数value是否大于0
     jQuery.validator.addMethod("isIntGtZero", function(value, element) { 
          value=parseInt(value);      
          return this.optional(element) || value>0;       
-    }, "整数必须大于0"); 
+    }, "Integer must be greater than 0");
       
     // 判断整数value是否大于或等于0
     jQuery.validator.addMethod("isIntGteZero", function(value, element) { 

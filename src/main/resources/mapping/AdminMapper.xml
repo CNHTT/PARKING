@@ -22,4 +22,25 @@
         WHERE   park_manager.companyUUID = #{companyUuid} AND IS_DELETE=1
     </select>
 
+    <select id="selectAdministratorListFromName" resultMap="AdminMap">
+        SELECT  park_manager.ID,USER_NAME,USER_PHONE,USER_EMAIL,park_manager.UUID ,park_manager.companyUUID ,park_manager.number,parkingUuid,CREATE_TIME ,park_manager.status,type,parking_lot.name  AS parkingLotName
+        FROM  park_manager LEFT  OUTER  JOIN  parking_lot ON   park_manager.parkingUuid=parking_lot.uuid
+        WHERE   park_manager.companyUUID = #{companyUuid} AND IS_DELETE=1 AND  park_manager.USER_NAME=${name}
+    </select>
+
+
+    <select id="selectManagerCountFromCompany" parameterType="java.lang.String" resultType="java.lang.Integer" >
+        SELECT count(*) FROM  park_manager WHERE  companyUuid = #{companyUuid}
+    </select>
+
+
+    <insert id="insertManager" parameterType="com.extra.model.ManagerBean">
+        <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT  LAST_INSERT_ID()
+        </selectKey>
+        INSERT  INTO  park_manager(USER_NAME,USER_PHONE,USER_EMAIL,USER_PWD,parkingUuid,UUID,companyUUID,number,type)
+        VALUES (#{userName},#{userPhone},#{userEmail},#{userPwd},#{parkingUuid},#{UUID},#{companyUUID},#{number},${type})
+    </insert>
+
+
 </mapper>

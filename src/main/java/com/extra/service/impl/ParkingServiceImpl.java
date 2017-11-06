@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 
 /**
  * Created by Extra on 2017/11/1.
@@ -38,8 +39,11 @@ public class ParkingServiceImpl implements ParkingService {
 
     @Override
     public boolean addParkingLot(ParkingLotBean lotBean) {
-        if (parkingDao.insertParkingLot(lotBean) ==0)
-        return false;
-        return true;
+        return parkingDao.insertParkingLot(lotBean) !=0;
+    }
+
+    @Override
+    public ArrayList<ParkingLotBean> loadParkingLotList(String companyUUID) {
+        return parkingDao.selectParkingLotList(companyUUID);
     }
 }

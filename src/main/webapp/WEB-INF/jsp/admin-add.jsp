@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: 戴尔
@@ -6,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path =request.getContextPath();
 %>
@@ -22,69 +24,57 @@
 <article class="page-container">
     <form class="form form-horizontal" id="form-admin-add">
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>管理员：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>Administrator：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="" id="adminName" name="adminName">
+                <input type="text" class="input-text" value="" placeholder="" id="userName" name="userName">
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>初始密码：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>Password：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="password" class="input-text" autocomplete="off" value="" placeholder="密码" id="password" name="password">
+                <input type="password" class="input-text" autocomplete="off" value="" placeholder="userPwd" id="userPwd" name="userPwd">
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>确认密码：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>Confirm Password：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="password" class="input-text" autocomplete="off"  placeholder="确认新密码" id="password2" name="password2">
+                <input type="password" class="input-text" autocomplete="off"  placeholder="Confirm Password" id="userPwd2" name="userPwd2">
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>性别：</label>
-            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
-                <div class="radio-box">
-                    <input name="sex" type="radio" id="sex-1" checked>
-                    <label for="sex-1">男</label>
-                </div>
-                <div class="radio-box">
-                    <input type="radio" id="sex-2" name="sex">
-                    <label for="sex-2">女</label>
-                </div>
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>Phone：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="" id="phone" name="phone">
+                <input type="text" class="input-text" value="" placeholder="" id="userPhone" name="userPhone">
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>邮箱：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>Email：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" placeholder="@" name="email" id="email">
+                <input type="text" class="input-text" placeholder="@" name="userEmail" id="userEmail">
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3">角色：</label>
+            <label class="form-label col-xs-4 col-sm-3">Parking Lot：</label>
             <div class="formControls col-xs-8 col-sm-9"> <span class="select-box" style="width:150px;">
-			<select class="select" name="adminRole" size="1">
-				<option value="0">超级管理员</option>
-				<option value="1">总编</option>
-				<option value="2">栏目主辑</option>
-				<option value="3">栏目编辑</option>
-			</select>
+                <select class="select" name="parkingUuid" size="1">
+                    <c:choose>
+                        <c:when test="${parkingLotList != null}">
+                            <option value="0">ALL Parking Lot</option>
+                            <c:forEach items="${parkingLotList}" var="lot">
+                                <option value="${lot.uuid}">${lot.name}</option>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="0">ALL Parking Lot</option>
+                        </c:otherwise>
+                    </c:choose>
+
+                </select>
 			</span> </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3">备注：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <textarea name="" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="$.Huitextarealength(this,100)"></textarea>
-                <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
-            </div>
-        </div>
-        <div class="row cl">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
-                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;Submit&nbsp;&nbsp;">
             </div>
         </div>
     </form>
@@ -102,6 +92,69 @@
 <script type="text/javascript" src="<%=path%>/static/js/validation/validate-methods.js"></script>
 <script type="text/javascript">
 
+    $(function () {
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+        $("#form-admin-add").validate({
+            rules:{
+                userName:{
+                    required:true,
+                    minlength:4,
+                    maxlength:16
+                },
+                userPwd:{
+                    required:true,
+                },
+                userPwd2:{
+                    required:true,
+                    equalTo: "#userPwd"
+                },
+                userPhone:{
+                    required:true,
+                    minlength:4,
+                },
+                userEmail:{
+                    required:true,
+                    email:true,
+                }
+            },
+            onkeyup:false,
+            focusCleanup:true,
+            success:"valid",
+            submitHandler:function(form){
+                $(form).ajaxSubmit({
+                    type: 'post',
+                    url: "${pageContext.request.contextPath}/addAdmin" ,
+                    success: function(data){
+                        if (data.toString()== "Yes"){
+                            //询问框
+                            layer.confirm('Add SUCCESS !  Whether to continue adding ? ', {
+                                btn: ['OK','NO'] //按钮
+                            }, function(){
+                                location.reload();
+                            }, function(){
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.$('.btn-refresh').click();
+                                parent.layer.close(index);
+                            });
+
+                        }else {
+                            layer.msg('error, Please try again!',{icon:1,time:1000});
+                        }
+
+                    },
+                    error: function(XmlHttpRequest, textStatus, errorThrown){
+                        layer.msg('error!',{icon:1,time:1000});
+                    }
+                });
+
+            }
+        });
+
+    });
 
 </script>
 </body>

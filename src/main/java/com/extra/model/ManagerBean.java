@@ -186,4 +186,30 @@ public class ManagerBean implements Serializable {
     public void setUUID(String UUID) {
         this.UUID = UUID;
     }
+
+
+    @Override
+    public String toString() {
+        return "ManagerBean{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", userPhone='" + userPhone + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userPwd='" + userPwd + '\'' +
+                ", pwdSalt='" + pwdSalt + '\'' +
+                ", site='" + site + '\'' +
+                ", cookie='" + cookie + '\'' +
+                ", createTime=" + createTime +
+                ", modifyTime=" + modifyTime +
+                ", strTime='" + strTime + '\'' +
+                ", uniqueNumber='" + uniqueNumber + '\'' +
+                ", parkingLotName='" + parkingLotName + '\'' +
+                ", parkingUuid='" + parkingUuid + '\'' +
+                ", UUID='" + UUID + '\'' +
+                ", companyUUID='" + companyUUID + '\'' +
+                ", number='" + number + '\'' +
+                ", status=" + status +
+                ", type=" + type +
+                '}';
+    }
 }
