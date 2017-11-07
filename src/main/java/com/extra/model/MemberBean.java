@@ -19,6 +19,7 @@ public class MemberBean implements Serializable {
     private String email;
     private String contactAddress;
     private int status;
+    private String lpm;
     private int is_del;
     private double balance;
     private String companyUuid;
@@ -31,6 +32,15 @@ public class MemberBean implements Serializable {
 
     public String getNumber() {
         return number;
+    }
+
+
+    public String getLpm() {
+        return lpm;
+    }
+
+    public void setLpm(String lpm) {
+        this.lpm = lpm;
     }
 
     public void setNumber(String number) {

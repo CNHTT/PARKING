@@ -100,7 +100,7 @@
                     <button class="layui-btn layui-btn-disabled layui-btn-small" >${n}</button>
                 </c:if>
             </c:forEach>
-            <c:if test="${adminList.pageNo!=adminList.total}">
+            <c:if test="${adminList.pageNo!=adminList.pages}">
                 <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/admin_list?pageName=${adminList.pageNo+1}">NEXT</button>
                 <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/admin_list?pageName=${adminList.total}">[END]</button>
             </c:if>
