@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.extra.dao.TransactionDao">
+
+    <select id="selectRechargeList" resultType="com.extra.model.RechargeBean">
+        SELECT
+               park_recharge.id,
+               park_recharge.memberUuid,
+               park_member.lpm as memberLPM,
+               tsn,
+               rAmont,bAmont,aAmont,
+               operateUuid,
+               park_manager.number as operateNumber,
+               deviceSN,
+               park_device.number as deviceNumber,
+               companyUuid,
+               createTime
+               FROM
+               park_recharge LEFT OUTER  JOIN park_member ON  park_recharge.memberUuid = park_member.uuid
+               LEFT  OUTER JOIN  park_device ON park_recharge.deviceSN  =park_device.sn
+               WHERE  companyUuid = #{companyUUID} ORDER BY id DESC
+    </select>
+
+</mapper>
