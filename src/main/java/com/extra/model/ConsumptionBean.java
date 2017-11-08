@@ -6,11 +6,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by Extra on 2017/11/7.
+ * Created by Extra on 2017/11/8.
  * GitHub cnhttt@163.com
  * Work to SZFP
  */
-public class RechargeBean implements Serializable{
+public class ConsumptionBean implements Serializable {
     private Long id;
     private String memberUuid;
     private String memberLPM;
@@ -31,13 +31,8 @@ public class RechargeBean implements Serializable{
     private Date createTime;
 
 
-    public String getMemberName() {
-        return memberName;
-    }
 
-    public void setMemberName(String memberName) {
-        this.memberName = memberName;
-    }
+
 
     public Long getId() {
         return id;
@@ -63,6 +58,14 @@ public class RechargeBean implements Serializable{
         this.memberLPM = memberLPM;
     }
 
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+
     public String getTsn() {
         return tsn;
     }
@@ -70,8 +73,6 @@ public class RechargeBean implements Serializable{
     public void setTsn(String tsn) {
         this.tsn = tsn;
     }
-
-
 
     public double getrAmount() {
         return rAmount;

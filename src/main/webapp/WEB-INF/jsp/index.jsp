@@ -77,7 +77,7 @@
             <dd>
                 <ul>
                     <li><a data-href="parking_records" data-title="Parking records" href="javascript:void(0)">Parking records</a></li>
-                    <li><a data-href="parking_undone" data-title="Unfinished record" href="javascript:void(0)">Unfinished record</a></li>
+                    <li><a data-href="parking_undone" data-title="Undone record" href="javascript:void(0)">Unfinished record</a></li>
                     <li><a data-href="parking_completed" data-title="Record completed" href="javascript:void(0)">Record completed</a></li>
                     <li><a data-href="parking_abnormal" data-title="abnormal data" href="javascript:void(0)">abnormal data</a></li>
                 </ul>
@@ -87,8 +87,8 @@
             <dt><i class="Hui-iconfont">&#xe626;</i> R / C <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="index" data-title="Recharge Record" href="javascript:void(0)">Recharge Record</a></li>
-                    <li><a data-href="index" data-title="Consumption Record" href="javascript:void(0)">Consumption Record</a></li>
+                    <li><a data-href="recharge_page" data-title="Recharge Record" href="javascript:void(0)">Recharge Record</a></li>
+                    <li><a data-href="consumption" data-title="Consumption Record" href="javascript:void(0)">Consumption Record</a></li>
                 </ul>
             </dd>
         </dl>

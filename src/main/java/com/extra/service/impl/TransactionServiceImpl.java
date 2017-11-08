@@ -1,6 +1,7 @@
 package com.extra.service.impl;
 
 import com.extra.dao.TransactionDao;
+import com.extra.model.ConsumptionBean;
 import com.extra.model.RechargeBean;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.TransactionService;
@@ -26,5 +27,19 @@ public class TransactionServiceImpl implements TransactionService {
         pageName  = pageName ==null?1:pageName;
         PageHelper.startPage(pageName,10);
         return BeanUtils.toResponseResult(transactionDao.selectRechargeList(companyUUID));
+    }
+
+    @Override
+    public ResponsePage<RechargeBean> loadRechargeListByLPM(String companyUUID, Integer pageName, String lpm) {
+        pageName  = pageName ==null?1:pageName;
+        PageHelper.startPage(pageName,10);
+        return BeanUtils.toResponseResult(transactionDao.selectRechargeListByLPM(companyUUID,lpm));
+    }
+
+    @Override
+    public ResponsePage<ConsumptionBean> loadConsumptionList(String companyUUID, Integer pageName) {
+        pageName  = pageName ==null?1:pageName;
+        PageHelper.startPage(pageName,10);
+        return  BeanUtils.toResponseResult(transactionDao.selectConsumptionByLPM(companyUUID));
     }
 }

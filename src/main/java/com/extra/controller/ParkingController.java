@@ -2,10 +2,12 @@ package com.extra.controller;
 
 import com.extra.model.ManagerBean;
 import com.extra.model.ParkingLotBean;
+import com.extra.model.ParkingRecordBean;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.ParkingService;
 import com.extra.utils.TimeUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,23 +31,106 @@ public class ParkingController extends  BaseController {
 
 
     @RequestMapping("parking_records")
-    public  String parkingRecords(){
+    public  String parkingRecords(HttpServletRequest req, ModelMap model ,Integer pageName){
+        ResponsePage<ParkingRecordBean> page = new ResponsePage<>();
+
+        try {
+            ManagerBean managerBean = (ManagerBean) req.getSession().getAttribute(SESSION_MANAGER);
+            log.info("parkingRecords:"+ managerBean.getClass()+managerBean.toString());
+            page = parkingService.loadAllParkingRecordList(managerBean.getCompanyUUID(),pageName);
+
+        }catch (Exception e){
+            log.info("parkingRecords:"+e.toString());
+        }
+        model.addAttribute("page",page);
         return "parking-records";
     }
+
+    @RequestMapping("parking.records.lpm")
+    public  String parkingRecordsByLPM(HttpServletRequest req, ModelMap model ,Integer pageName,String lpm){
+        ResponsePage<ParkingRecordBean> page = new ResponsePage<>();
+
+        try {
+            ManagerBean managerBean = (ManagerBean) req.getSession().getAttribute(SESSION_MANAGER);
+            log.info("parkingRecords:"+ managerBean.getClass()+managerBean.toString());
+            page = parkingService.loadAllParkingRecordListByLpm(managerBean.getCompanyUUID(),pageName,lpm);
+
+        }catch (Exception e){
+            log.info("parkingRecords:"+e.toString());
+        }
+        model.addAttribute("page",page);
+        return "parking-records";
+    }
+
+
+    @RequestMapping("parking_undone")
+    public  String parkingUndone(HttpServletRequest req, ModelMap model ,Integer pageName){
+        ResponsePage<ParkingRecordBean> page = new ResponsePage<>();
+
+        try {
+            ManagerBean managerBean = (ManagerBean) req.getSession().getAttribute(SESSION_MANAGER);
+            log.info("Undone:"+ managerBean.getClass()+managerBean.toString());
+            page = parkingService.loadAllParkingUndoneList(managerBean.getCompanyUUID(),pageName);
+
+        }catch (Exception e){
+            log.info("parkingRecords:"+e.toString());
+        }
+        model.addAttribute("page",page);
+        return "parking-undone";
+    }
+
+    @RequestMapping("undone.lpm")
+    public  String parkingUndoneByLpm(HttpServletRequest req, ModelMap model ,Integer pageName,String lpm){
+        ResponsePage<ParkingRecordBean> page = new ResponsePage<>();
+
+        try {
+            ManagerBean managerBean = (ManagerBean) req.getSession().getAttribute(SESSION_MANAGER);
+            log.info("Undone:"+ managerBean.getClass()+managerBean.toString());
+            page = parkingService.loadAllParkingUndoneByLpmList(managerBean.getCompanyUUID(),pageName,lpm);
+
+        }catch (Exception e){
+            log.info("parkingRecords:"+e.toString());
+        }
+        model.addAttribute("page",page);
+        return "parking-undone";
+    }
+
+    @RequestMapping("parking_completed")
+    public  String parkingCompleted(HttpServletRequest req, ModelMap model ,Integer pageName){
+        ResponsePage<ParkingRecordBean> page = new ResponsePage<>();
+
+        try {
+            ManagerBean managerBean = (ManagerBean) req.getSession().getAttribute(SESSION_MANAGER);
+            log.info("Undone:"+ managerBean.getClass()+managerBean.toString());
+            page = parkingService.loadAllParkingCompletedList(managerBean.getCompanyUUID(),pageName);
+
+        }catch (Exception e){
+            log.info("parkingRecords:"+e.toString());
+        }
+        model.addAttribute("page",page);
+        return "parking-completed";
+    }
+
+    @RequestMapping("completed.lpm")
+    public  String parkingCompletedByLpm(HttpServletRequest req, ModelMap model ,Integer pageName,String lpm){
+        ResponsePage<ParkingRecordBean> page = new ResponsePage<>();
+
+        try {
+            ManagerBean managerBean = (ManagerBean) req.getSession().getAttribute(SESSION_MANAGER);
+            log.info("Undone:"+ managerBean.getClass()+managerBean.toString());
+            page = parkingService.loadAllParkingCompletedByLpmList(managerBean.getCompanyUUID(),pageName,lpm);
+
+        }catch (Exception e){
+            log.info("parkingRecords:"+e.toString());
+        }
+        model.addAttribute("page",page);
+        return "parking-undone";
+    }
+
     @RequestMapping("parking_abnormal")
     public  String parkingAbnormal(){
         return "parking-abnormal";
     }
-    @RequestMapping("parking_completed")
-    public  String parkingCompleted(){
-        return "parking-completed";
-    }
-    @RequestMapping("parking_undone")
-    public  String parkingUndone(){
-        return "parking-undone";
-    }
-
-
 
 
 
@@ -54,7 +139,6 @@ public class ParkingController extends  BaseController {
 
     @RequestMapping("parking_management")
     public  String parkingManagement(){return "parking-management";}
-
 
 
     @RequestMapping("parking_lot_add")

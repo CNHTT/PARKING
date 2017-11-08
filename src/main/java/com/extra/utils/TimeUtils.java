@@ -613,7 +613,19 @@ public class TimeUtils {
     public static String getDate(String times, String format) {
         return simpleDateFormat(format, new Date(stringToInt(times) * 1000L));
     }
-
+    /**
+     * 停车时间 转换成 "mm:ss"
+     *
+     * @param milliseconds
+     * @return
+     */
+    public static String formatParkTime(long milliseconds) {
+        String format = "HH:mm:ss";
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+0"));
+        String video_time = sdf.format(milliseconds);
+        return video_time;
+    }
     /**
      * 得到昨天的日期
      *

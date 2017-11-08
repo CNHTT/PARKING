@@ -34,7 +34,8 @@ public class LoginController extends BaseController {
     }
 
     @RequestMapping("/index")
-    private  String index(){
+    private  String index(HttpServletRequest request){
+        if (request.getSession().getAttribute("SESSION_MANAGER")==null)return "login";
         return "index";
     }
 

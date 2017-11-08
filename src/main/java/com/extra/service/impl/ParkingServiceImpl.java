@@ -2,6 +2,7 @@ package com.extra.service.impl;
 
 import com.extra.dao.ParkingDao;
 import com.extra.model.ParkingLotBean;
+import com.extra.model.ParkingRecordBean;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.ParkingService;
 import com.extra.utils.BeanUtils;
@@ -45,5 +46,47 @@ public class ParkingServiceImpl implements ParkingService {
     @Override
     public ArrayList<ParkingLotBean> loadParkingLotList(String companyUUID) {
         return parkingDao.selectParkingLotList(companyUUID);
+    }
+
+    @Override
+    public ResponsePage<ParkingRecordBean> loadAllParkingRecordList(String parkingUuid, Integer pageName) {
+        pageName = pageName==null?1:pageName;
+        PageHelper.startPage(pageName,10);
+        return BeanUtils.toResponseResult(parkingDao.selectParkingRecordAllList(parkingUuid));
+    }
+
+    @Override
+    public ResponsePage<ParkingRecordBean> loadAllParkingRecordListByLpm(String companyUUID, Integer pageName, String lpm) {
+        pageName = pageName==null?1:pageName;
+        PageHelper.startPage(pageName,10);
+        return BeanUtils.toResponseResult(parkingDao.selectParkingRecordByLpmAllList(companyUUID,lpm));
+    }
+
+    @Override
+    public ResponsePage<ParkingRecordBean> loadAllParkingUndoneList(String companyUUID, Integer pageName) {
+        pageName = pageName==null?1:pageName;
+        PageHelper.startPage(pageName,10);
+        return BeanUtils.toResponseResult(parkingDao.selectParkingUndoneAllList(companyUUID));
+    }
+
+    @Override
+    public ResponsePage<ParkingRecordBean> loadAllParkingUndoneByLpmList(String companyUUID, Integer pageName, String lpm) {
+        pageName = pageName==null?1:pageName;
+        PageHelper.startPage(pageName,10);
+        return BeanUtils.toResponseResult(parkingDao.selectParkingUndoneByLpmList(companyUUID,lpm));
+    }
+
+    @Override
+    public ResponsePage<ParkingRecordBean> loadAllParkingCompletedList(String companyUUID, Integer pageName) {
+        pageName = pageName==null?1:pageName;
+        PageHelper.startPage(pageName,10);
+        return BeanUtils.toResponseResult(parkingDao.selectParkingCompletedAllList(companyUUID));
+    }
+
+    @Override
+    public ResponsePage<ParkingRecordBean> loadAllParkingCompletedByLpmList(String companyUUID, Integer pageName, String lpm) {
+        pageName = pageName==null?1:pageName;
+        PageHelper.startPage(pageName,10);
+        return BeanUtils.toResponseResult(parkingDao.selectParkingCompletedByLpmList(companyUUID,lpm));
     }
 }

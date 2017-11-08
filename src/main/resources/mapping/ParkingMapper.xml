@@ -21,4 +21,115 @@
         VALUES (#{name},#{number},#{company},#{address},#{entryAddress},#{principal},#{contactNumber},#{area},#{quantity},#{uuid},#{companyUuid},#{addMangerUuid})
     </insert>
 
+
+
+
+
+    <select id="selectParkingRecordAllList" resultType="com.extra.model.ParkingRecordBean">
+          SELECT
+              park_parking.tsn,
+              park_parking.memberUuid,
+              park_member.name as memberName,
+              park_member.lpm  as memberLpm,
+              park_parking.amount,
+              enterTime,exitTime,
+              parkingTime,
+              parking_lot.number AS parkingLotName,
+              park_parking.parkingUuid
+
+            FROM park_parking LEFT OUTER JOIN park_member ON park_parking.memberUuid = park_member.uuid
+
+              LEFT OUTER JOIN  parking_lot ON  park_parking.parkingUuid = parking_lot.uuid
+            WHERE park_parking.companyUuid = #{companyUUID} ORDER BY park_parking.id DESC
+          </select>
+
+    <select id="selectParkingRecordByLpmAllList" resultType="com.extra.model.ParkingRecordBean">
+          SELECT
+              park_parking.tsn,
+              park_parking.memberUuid,
+              park_member.name as memberName,
+              park_member.lpm  as memberLpm,
+              park_parking.amount,
+              enterTime,exitTime,
+              parkingTime,
+              parking_lot.number AS parkingLotName,
+              park_parking.parkingUuid
+
+            FROM park_parking LEFT OUTER JOIN park_member ON park_parking.memberUuid = park_member.uuid
+
+              LEFT OUTER JOIN  parking_lot ON  park_parking.parkingUuid = parking_lot.uuid
+            WHERE park_parking.companyUuid = #{companyUUID} AND park_member.lpm = #{lpm} ORDER BY park_parking.id DESC
+          </select>
+
+    <select id="selectParkingUndoneAllList" resultType="com.extra.model.ParkingRecordBean">
+          SELECT
+              park_parking.tsn,
+              park_parking.memberUuid,
+              park_member.name as memberName,
+              park_member.lpm  as memberLpm,
+              park_parking.amount,
+              enterTime,exitTime,
+              parkingTime,
+              parking_lot.number AS parkingLotName,
+              park_parking.parkingUuid
+
+            FROM park_parking LEFT OUTER JOIN park_member ON park_parking.memberUuid = park_member.uuid
+
+              LEFT OUTER JOIN  parking_lot ON  park_parking.parkingUuid = parking_lot.uuid
+            WHERE park_parking.companyUuid = #{companyUUID} AND type = 1 ORDER BY park_parking.id DESC
+          </select>
+
+    <select id="selectParkingUndoneByLpmList" resultType="com.extra.model.ParkingRecordBean">
+          SELECT
+              park_parking.tsn,
+              park_parking.memberUuid,
+              park_member.name as memberName,
+              park_member.lpm  as memberLpm,
+              park_parking.amount,
+              enterTime,exitTime,
+              parkingTime,
+              parking_lot.number AS parkingLotName,
+              park_parking.parkingUuid
+
+            FROM park_parking LEFT OUTER JOIN park_member ON park_parking.memberUuid = park_member.uuid
+
+              LEFT OUTER JOIN  parking_lot ON  park_parking.parkingUuid = parking_lot.uuid
+            WHERE park_parking.companyUuid = #{companyUUID} AND type = 1 AND park_member.lpm = #{lpm} ORDER BY park_parking.id DESC
+          </select>
+    <select id="selectParkingCompletedAllList" resultType="com.extra.model.ParkingRecordBean">
+          SELECT
+              park_parking.tsn,
+              park_parking.memberUuid,
+              park_member.name as memberName,
+              park_member.lpm  as memberLpm,
+              park_parking.amount,
+              enterTime,exitTime,
+              parkingTime,
+              parking_lot.number AS parkingLotName,
+              park_parking.parkingUuid
+
+            FROM park_parking LEFT OUTER JOIN park_member ON park_parking.memberUuid = park_member.uuid
+
+              LEFT OUTER JOIN  parking_lot ON  park_parking.parkingUuid = parking_lot.uuid
+            WHERE park_parking.companyUuid = #{companyUUID} AND type = 0 ORDER BY park_parking.id DESC
+          </select>
+
+    <select id="selectParkingCompletedByLpmList" resultType="com.extra.model.ParkingRecordBean">
+          SELECT
+              park_parking.tsn,
+              park_parking.memberUuid,
+              park_member.name as memberName,
+              park_member.lpm  as memberLpm,
+              park_parking.amount,
+              enterTime,exitTime,
+              parkingTime,
+              parking_lot.number AS parkingLotName,
+              park_parking.parkingUuid
+
+            FROM park_parking LEFT OUTER JOIN park_member ON park_parking.memberUuid = park_member.uuid
+
+              LEFT OUTER JOIN  parking_lot ON  park_parking.parkingUuid = parking_lot.uuid
+            WHERE park_parking.companyUuid = #{companyUUID} AND type = 0 AND park_member.lpm = #{lpm} ORDER BY park_parking.id DESC
+          </select>
+
 </mapper>

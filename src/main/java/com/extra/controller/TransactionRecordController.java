@@ -1,11 +1,13 @@
 package com.extra.controller;
 
+import com.extra.model.ConsumptionBean;
 import com.extra.model.ManagerBean;
 import com.extra.model.MemberBean;
 import com.extra.model.RechargeBean;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.TransactionService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -42,5 +44,41 @@ public class TransactionRecordController extends BaseController {
         mode.addAttribute("page",page);
         return "cost-recharge";
     }
+
+
+    @RequestMapping("recharge.lpm")
+    public String showRechargeRecordByLPM(HttpServletRequest req,ModelMap model,Integer pageName ,String lpm){
+        log.info(lpm);
+        ResponsePage<RechargeBean> page = new ResponsePage<>();
+        try {
+            ManagerBean managerBean = (ManagerBean) req.getSession().getAttribute(SESSION_MANAGER);
+            log.info("load  recharge   List"+managerBean.getUserName());
+            if (!isEmpty(managerBean))
+                page = transactionService.loadRechargeListByLPM(managerBean.getCompanyUUID(),pageName,lpm);
+        }catch (Exception e){
+            log.info(e.toString());
+        }
+        model.addAttribute("page",page);
+        return "cost-recharge";
+    }
+
+
+
+    @RequestMapping("consumption")
+    public String showConsumptionRecord(HttpServletRequest req, ModelMap model,Integer pageName){
+        ResponsePage<ConsumptionBean> page = new ResponsePage<>();
+        try {
+            ManagerBean managerBean = (ManagerBean) req.getSession().getAttribute(SESSION_MANAGER);
+            log.info("load  ConsumptionRecord   List"+managerBean.getUserName());
+            if (!isEmpty(managerBean))
+                page = transactionService.loadConsumptionList(managerBean.getCompanyUUID(),pageName);
+        }catch (Exception e){
+            log.info(e.toString());
+        }
+        model.addAttribute("page",page);
+        return "cost-consumption";
+    }
+
+
 
 }

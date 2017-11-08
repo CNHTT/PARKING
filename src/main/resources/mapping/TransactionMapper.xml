@@ -4,21 +4,65 @@
 
     <select id="selectRechargeList" resultType="com.extra.model.RechargeBean">
         SELECT
-               park_recharge.id,
-               park_recharge.memberUuid,
-               park_member.lpm as memberLPM,
-               tsn,
-               rAmont,bAmont,aAmont,
+            park_recharge.id,
+             park_recharge.memberUuid,
+             park_member.lpm as memberLPM,
+              tsn,
+               rAmount,bAmount,aAmount,
+               park_member.name as memberName,
                operateUuid,
                park_manager.number as operateNumber,
-               deviceSN,
-               park_device.number as deviceNumber,
-               companyUuid,
-               createTime
-               FROM
-               park_recharge LEFT OUTER  JOIN park_member ON  park_recharge.memberUuid = park_member.uuid
-               LEFT  OUTER JOIN  park_device ON park_recharge.deviceSN  =park_device.sn
-               WHERE  companyUuid = #{companyUUID} ORDER BY id DESC
+                deviceSN,
+                park_device.number as deviceNumber,
+                park_recharge.companyUuid,
+                park_recharge.createTime
+                FROM
+                park_recharge LEFT OUTER  JOIN park_member ON  park_recharge.memberUuid = park_member.uuid
+                LEFT  OUTER JOIN  park_device ON park_recharge.deviceSN  =park_device.sn  LEFT  OUTER JOIN  park_manager ON operateUuid =park_manager.UUID
+                WHERE  park_recharge.companyUuid = #{companyUUID} ORDER BY id DESC
+    </select>
+
+    <select id="selectConsumptionByLPM" resultType="com.extra.model.ConsumptionBean">
+        SELECT
+            park_consumption.id,
+             park_consumption.memberUuid,
+             park_member.lpm as memberLPM,
+              tsn,
+               rAmount,bAmount,aAmount,
+               park_member.name as memberName,
+               operateUuid,
+               park_manager.number as operateNumber,
+                deviceSN,
+                park_device.number as deviceNumber,
+                park_consumption.companyUuid,
+                park_consumption.createTime
+                FROM
+                park_consumption LEFT OUTER  JOIN park_member ON  park_consumption.memberUuid = park_member.uuid
+                LEFT  OUTER JOIN  park_device ON park_consumption.deviceSN  =park_device.sn  LEFT  OUTER JOIN  park_manager ON operateUuid =park_manager.UUID
+                WHERE  park_consumption.companyUuid = #{companyUUID} ORDER BY id DESC
+    </select>
+
+
+
+
+    <select id="selectRechargeListByLPM" resultType="com.extra.model.RechargeBean">
+        SELECT
+            park_recharge.id,
+             park_recharge.memberUuid,
+             park_member.lpm as memberLPM,
+              tsn,
+               rAmount,bAmount,aAmount,
+               park_member.name as memberName,
+               operateUuid,
+               park_manager.number as operateNumber,
+                deviceSN,
+                park_device.number as deviceNumber,
+                park_recharge.companyUuid,
+                park_recharge.createTime
+                FROM
+                park_recharge LEFT OUTER  JOIN park_member ON  park_recharge.memberUuid = park_member.uuid
+                LEFT  OUTER JOIN  park_device ON park_recharge.deviceSN  =park_device.sn  LEFT  OUTER JOIN  park_manager ON operateUuid =park_manager.UUID
+                WHERE  park_recharge.companyUuid = #{companyUUID} AND park_member.lpm =#{lpm} ORDER BY id DESC
     </select>
 
 </mapper>
