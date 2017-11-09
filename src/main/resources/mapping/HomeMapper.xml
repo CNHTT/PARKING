@@ -9,7 +9,10 @@
 
 
     <select id="selectDeviceList" resultType="com.extra.model.DeviceBean">
-        SELECT  * from park_device WHERE  uuid = #{companyUUID}
+        SELECT  * from park_device WHERE  company = #{companyUUID}
+    </select>
+    <select id="selectDeviceBySn" resultType="com.extra.model.DeviceBean">
+        SELECT  * from park_device WHERE  company = #{companyUUID} AND  sn =#{sn}
     </select>
 
 </mapper>

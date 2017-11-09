@@ -68,25 +68,38 @@ public class HomeController extends BaseController {
         ResponseObj<CompanyInformationBean> result = new ResponseObj<>();
         try {
             log.info(NetworkUtil.getIpAddress(request) + "-" + companyUUID + "-" +uuid +"-" +parkingUuid);
-            ParkingLotBean parkingLotBean  =homeService.loadParkingBy(parkingUuid);
-            ArrayList<ParkingLotBean> list = new ArrayList<>();
-            CompanyInformationBean companyLotBean =   homeService.getCompanyInformationByUUID(companyUUID);
-            if (isEmpty(parkingUuid)){
-                companyLotBean.setLotList(parkingService.loadParkingLotList(companyUUID));
-            }else if (isEmpty(parkingLotBean)){
-                companyLotBean.setLotList(parkingService.loadParkingLotList(companyUUID));
-            }else {
-                list.add(parkingLotBean);
-                companyLotBean.setLotList(list);
+            if (isEmpty(sn)){
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please check if the device exists!!");
+            }
+            else
+            {
+                DeviceBean deviceBean = homeService.loadDeviceBySn(sn,companyUUID);
+                if (isEmpty(deviceBean)){
+                    result.setCode(ResponseObj.EMPUTY);
+                    result.setMsg("Please check if the device exists!!");
+                }else {
+                    ArrayList<ParkingLotBean> list = new ArrayList<>();
+                    CompanyInformationBean companyLotBean =   homeService.getCompanyInformationByUUID(companyUUID);
+                    ParkingLotBean parkingLotBean  =homeService.loadParkingBy(parkingUuid);
+                    companyLotBean.setDevice(deviceBean);
+                    if (isEmpty(parkingUuid)){
+                        companyLotBean.setLotList(parkingService.loadParkingLotList(companyUUID));
+                    }else if (isEmpty(parkingLotBean)){
+                        companyLotBean.setLotList(parkingService.loadParkingLotList(companyUUID));
+                    }else {
+                        list.add(parkingLotBean);
+                        companyLotBean.setLotList(list);
+                    }
+                    result.setData(companyLotBean);
+                    result.setCode(ResponseObj.OK);
+                }
             }
 
-            result.setData(companyLotBean);
-            result.setCode(ResponseObj.OK);
         }catch (Exception e){
             result.setCode(ResponseObj.FAILED);
             result.setMsg(e.toString());
         }
-
         return new GsonUtils().toJson(result);
     }
 

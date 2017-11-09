@@ -18,4 +18,5 @@ public interface HomeService {
 
     ParkingLotBean loadParkingBy(String parkingUuid);
 
+    DeviceBean loadDeviceBySn(String sn, String companyUUID);
 }

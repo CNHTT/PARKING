@@ -47,4 +47,9 @@ public class HomeServiceImpl implements HomeService {
         return parkingDao.selectParkingLotByUUID(parkingUuid);
     }
 
+    @Override
+    public DeviceBean loadDeviceBySn(String sn, String companyUUID) {
+        return homeDao.selectDeviceBySn(sn,companyUUID);
+    }
+
 }

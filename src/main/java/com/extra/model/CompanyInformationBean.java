@@ -29,9 +29,19 @@ public class CompanyInformationBean {
     private Date modifyTime;
 
 
+    private DeviceBean device;
+
 
     private List<ParkingLotBean> lotList;
 
+
+    public DeviceBean getDevice() {
+        return device;
+    }
+
+    public void setDevice(DeviceBean device) {
+        this.device = device;
+    }
 
     public List<ParkingLotBean> getLotList() {
         return lotList;

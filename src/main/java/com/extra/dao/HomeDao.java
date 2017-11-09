@@ -3,6 +3,7 @@ package com.extra.dao;
 import com.extra.model.CompanyInformationBean;
 import com.extra.model.CompanyLotBean;
 import com.extra.model.DeviceBean;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -18,4 +19,5 @@ public interface HomeDao {
 
     ArrayList<DeviceBean> selectDeviceList(String companyUUID);
 
+    DeviceBean selectDeviceBySn(@Param("sn") String sn,@Param("companyUUID") String companyUUID);
 }

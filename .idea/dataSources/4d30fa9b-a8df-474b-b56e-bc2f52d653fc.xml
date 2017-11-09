@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="szfp@39.108.61.105">
-  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
     <root id="1"/>
     <schema id="2" parent="1" name="szfp">
       <Current>1</Current>
@@ -636,7 +636,6 @@
       <Position>9</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>&apos;6666666666666&apos;</DefaultExpression>
     </column>
     <column id="139" parent="17" name="companyUUID">
       <Position>10</Position>
