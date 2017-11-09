@@ -65,15 +65,15 @@
 <aside class="Hui-aside">
     <div class="menu_dropdown bk_2">
         <dl id="menu-article">
-            <dt><i class="Hui-iconfont">&#xe616;</i> 数据管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dt><i class="Hui-iconfont">&#xe616;</i> Device<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="data_list" data-title="数据管理" href="javascript:void(0)">数据管理</a></li>
+                    <li><a data-href="data_list" data-title="Device Management" href="javascript:void(0)">Device Management</a></li>
                 </ul>
             </dd>
         </dl>
         <dl id="menu-picture">
-            <dt><i class="Hui-iconfont">&#xe626;</i> Parking records<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dt><i class="Hui-iconfont">&#xe626;</i> P Records<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
                     <li><a data-href="parking_records" data-title="Parking records" href="javascript:void(0)">Parking records</a></li>
@@ -84,7 +84,7 @@
             </dd>
         </dl>
         <dl id="menu-cost">
-            <dt><i class="Hui-iconfont">&#xe626;</i> R / C <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dt><i class="Hui-iconfont">&#xe626;</i> Transaction <i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
                     <li><a data-href="recharge_page" data-title="Recharge Record" href="javascript:void(0)">Recharge Record</a></li>
@@ -93,7 +93,7 @@
             </dd>
         </dl>
         <dl id="menu-member">
-            <dt><i class="Hui-iconfont">&#xe62c;</i> M M<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dt><i class="Hui-iconfont">&#xe62c;</i> Member<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
                     <li><a data-href="member_list" data-title="Member List" href="javascript:void(0)">Member List</a></li>
@@ -102,7 +102,7 @@
             </dd>
         </dl>
         <dl id="menu-product">
-            <dt><i class="Hui-iconfont">&#xe6c6;</i> PLM<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dt><i class="Hui-iconfont">&#xe6c6;</i> Parking Lot<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
                     <li><a data-href="parking_management" data-title="PARKING LOT" href="javascript:;">PARKING LOT</a></li>

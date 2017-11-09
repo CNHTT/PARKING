@@ -1,14 +1,17 @@
 package com.extra.controller;
 
-import com.extra.model.CompanyInformationBean;
-import com.extra.model.HomeBean;
-import com.extra.model.ManagerBean;
-import com.extra.model.StatisticsBean;
+import com.extra.dao.ParkingDao;
+import com.extra.model.*;
+import com.extra.model.response.ResponseObj;
 import com.extra.service.HomeService;
+import com.extra.service.ParkingService;
+import com.extra.utils.DataUtils;
+import com.extra.utils.GsonUtils;
 import com.extra.utils.NetworkUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.extra.utils.DataUtils.isEmpty;
 import static com.extra.utils.SessionUtils.SESSION_MANAGER;
 
 /**
@@ -33,10 +37,13 @@ public class HomeController extends BaseController {
     @Resource
     private HomeService homeService;
 
+    @Resource
+    private ParkingService parkingService;
+
     @RequestMapping("welcome")
     private  String welcome(HttpServletRequest req, ModelMap modelMap){
-        HomeBean homeBean = new HomeBean();
         ManagerBean managerBean = (ManagerBean) req.getSession().getAttribute(SESSION_MANAGER);
+        HomeBean homeBean = new HomeBean();
         homeBean.setIp(NetworkUtil.getIpAddress(req));
         homeBean.setLoginNum(100);
         homeBean.setTime(new Date());
@@ -52,6 +59,35 @@ public class HomeController extends BaseController {
         req.setAttribute("data",homeBean);
         modelMap.addAttribute("company",homeService.getCompanyInformationByUUID(managerBean.getCompanyUUID()));
         return "welcome";
+    }
+
+
+    @RequestMapping("companyInfo.p")
+    @ResponseBody
+    private String loadCompanyAndLotByDevice(HttpServletRequest request, String companyUUID,String uuid, String parkingUuid,String sn){
+        ResponseObj<CompanyInformationBean> result = new ResponseObj<>();
+        try {
+            log.info(NetworkUtil.getIpAddress(request) + "-" + companyUUID + "-" +uuid +"-" +parkingUuid);
+            ParkingLotBean parkingLotBean  =homeService.loadParkingBy(parkingUuid);
+            ArrayList<ParkingLotBean> list = new ArrayList<>();
+            CompanyInformationBean companyLotBean =   homeService.getCompanyInformationByUUID(companyUUID);
+            if (isEmpty(parkingUuid)){
+                companyLotBean.setLotList(parkingService.loadParkingLotList(companyUUID));
+            }else if (isEmpty(parkingLotBean)){
+                companyLotBean.setLotList(parkingService.loadParkingLotList(companyUUID));
+            }else {
+                list.add(parkingLotBean);
+                companyLotBean.setLotList(list);
+            }
+
+            result.setData(companyLotBean);
+            result.setCode(ResponseObj.OK);
+        }catch (Exception e){
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+
+        return new GsonUtils().toJson(result);
     }
 
 }

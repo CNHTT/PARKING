@@ -1,11 +1,15 @@
 package com.extra.controller;
 
 import com.extra.model.ManagerBean;
+import com.extra.model.response.ResponseObj;
 import com.extra.service.LoginService;
+import com.extra.utils.GsonUtils;
 import com.extra.utils.MD5Util;
+import com.extra.utils.NetworkUtil;
 import com.extra.utils.SessionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -63,5 +67,34 @@ public class LoginController extends BaseController {
             session.setAttribute(SESSION_MANAGER,managerBean);
             return "redirect:index";
         }
+    }
+
+
+    @RequestMapping("login.p")
+    @ResponseBody
+    public String deviceLogin(HttpServletRequest request, String name,String pwd){
+        ResponseObj<ManagerBean> result = new ResponseObj<>();
+
+        try {
+            log.info(NetworkUtil.getIpAddress(request) +"-"+ name+"-"+pwd);
+            if (isCheckPassWord(pwd)&&isNullString(name)){
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please input UserNameOrEmail  PassWord!");
+            }else {
+                ManagerBean managerBean = loginService.loginByDevice(name,MD5Util.string2MD5(pwd));
+                if (isEmpty(managerBean)){
+                    result.setCode(ResponseObj.EMPUTY);
+                    result.setMsg("Please Check Input!");
+                }else {
+                    result.setData(managerBean);
+                    result.setCode(ResponseObj.OK);
+                }
+            }
+
+        }catch (Exception e){
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
     }
 }

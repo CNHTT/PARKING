@@ -9,4 +9,6 @@ import com.extra.model.ManagerBean;
  */
 public interface LoginService {
     ManagerBean getManagerInfo(String username,String pwd);
+
+    ManagerBean loginByDevice(String name, String pwd);
 }

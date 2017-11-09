@@ -3,6 +3,7 @@ package com.extra.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Extra on 2017/10/31.
@@ -26,6 +27,19 @@ public class CompanyInformationBean {
     private Date createTime;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date modifyTime;
+
+
+
+    private List<ParkingLotBean> lotList;
+
+
+    public List<ParkingLotBean> getLotList() {
+        return lotList;
+    }
+
+    public void setLotList(List<ParkingLotBean> lotList) {
+        this.lotList = lotList;
+    }
 
     public Long getId() {
         return id;

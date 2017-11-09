@@ -31,4 +31,6 @@ public interface ParkingDao {
     ArrayList<ParkingRecordBean> selectParkingCompletedByLpmList(@Param("companyUUID") String companyUUID,@Param("lpm") String lpm);
 
     ArrayList<ParkingRecordBean> selectParkingCompletedAllList(String companyUUID);
+
+    ParkingLotBean selectParkingLotByUUID(String parkingUuid);
 }

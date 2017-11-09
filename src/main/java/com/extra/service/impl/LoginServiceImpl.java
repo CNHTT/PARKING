@@ -24,4 +24,9 @@ public class LoginServiceImpl implements LoginService {
     public ManagerBean getManagerInfo(String username, String pwd) {
         return userDao.selectManagerBySignIn(username,pwd);
     }
+
+    @Override
+    public ManagerBean loginByDevice(String name, String pwd) {
+        return  userDao.selectManagerBySignIn(name,pwd);
+    }
 }

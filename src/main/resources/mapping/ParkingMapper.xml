@@ -6,6 +6,10 @@
         SELECT  * FROM parking_lot
         WHERE companyUuid = #{companyUUID}
     </select>
+    <select id="selectParkingLotByUUID" resultType="com.extra.model.ParkingLotBean">
+        SELECT  * FROM parking_lot
+        WHERE uuid = #{parkingUuid}
+    </select>
 
 
     <select id="selectParkingLotCount" parameterType="java.lang.String" resultType="java.lang.Integer" >

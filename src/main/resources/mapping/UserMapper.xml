@@ -8,10 +8,12 @@
         <result column="USER_EMAIL" property="userEmail" jdbcType="VARCHAR"/>
         <result column="UUID" property="UUID" jdbcType="VARCHAR"/>
         <result column="companyUUID" property="companyUUID" jdbcType="VARCHAR"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="parkingUuid" property="parkingUuid" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="selectManagerBySignIn" resultMap="ManagerBaseMap">
-        SELECT  ID,USER_NAME,USER_PHONE,USER_EMAIL,UUID ,companyUUID FROM park_manager
+        SELECT  ID,USER_NAME,USER_PHONE,USER_EMAIL,UUID ,companyUUID,number,parkingUuid FROM park_manager
         WHERE (USER_NAME = #{username} OR USER_EMAIL = #{username})
         AND  USER_PWD = #{pwd} AND IS_DELETE=1
     </select>
