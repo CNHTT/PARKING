@@ -13,7 +13,7 @@ import java.util.Date;
 public class MemberBean implements Serializable {
     private Long id;
     private String name;
-    private String sex;
+    private int sex;
     private String number;
     private String phone;
     private String email;
@@ -63,11 +63,11 @@ public class MemberBean implements Serializable {
         this.name = name;
     }
 
-    public String getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 

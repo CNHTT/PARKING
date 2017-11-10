@@ -28,4 +28,12 @@
         WHERE uuid = #{uuid}
     </select>
 
+    <insert id="insertMember" parameterType="com.extra.model.MemberBean">
+    <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
+        SELECT  LAST_INSERT_ID()
+    </selectKey>
+        INSERT  INTO park_member(name,sex,phone,email,uuid,cardId,createTime,companyUuid,addManagerUuid,lpm)
+        VALUES (#{name},#{sex},#{phone},#{email},#{uuid},#{cardId},#{createTime},#{companyUuid},#{addManagerUuid},#{lpm})
+    </insert>
+
 </mapper>

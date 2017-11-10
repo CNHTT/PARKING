@@ -10,12 +10,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
+    int sn = 1;
 %>
 <html>
 <head>
     <jsp:include page="/commons/public-head.jsp"/>
     <link rel="stylesheet" href="<%=path%>/static/layui/css/layui.css"  media="all">
     <title>Member List</title>
+
 </head>
 <body>
 <nav class="breadcrumb">
@@ -46,7 +48,7 @@
             </tr>
             <tr class="text-c">
                 <th width="25"><input type="checkbox" name="" value=""></th>
-                <th width="66">Number</th>
+                <th width="66">SN</th>
                 <th width="100">Name</th>
                 <th width="90">Phone</th>
                 <th width="150">Email</th>
@@ -62,7 +64,7 @@
                     <c:forEach items="${page.dataList}" var="member">
                         <tr class="text-c">
                             <td><input type="checkbox" value="1" name=""></td>
-                            <td>${member.number}</td>
+                            <td><%=sn++%></td>
                             <td><u style="cursor:pointer" class="text-primary" onclick="member_show('${member.name}','member/uuid?uuid=${member.uuid}','400','450')">${member.name}</u></td>
                             <td>${member.phone}</td>
                             <td>${member.email}</td>

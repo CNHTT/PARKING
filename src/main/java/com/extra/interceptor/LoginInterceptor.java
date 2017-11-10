@@ -20,13 +20,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     private Logger log = Logger.getLogger(LoginInterceptor.class);
 
     private boolean flag=false;
-    private static final String[] IGNORE_URI={"/login","/singin"};
+    private static final String[] IGNORE_URI={"/login","/signin"};
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestUri = request.getRequestURI();
         String contextPath = request.getContextPath();
         String url = requestUri.substring(contextPath.length());
 
+        log.info(url);
         //判断请求是否需要拦截
         for(String s:IGNORE_URI){
             if(url.contains(s)){
@@ -36,6 +37,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         }
 
         if (flag) return true;
+
+
+
 
         log.info("requestUri:"+requestUri);
         log.info("contextPath:"+contextPath);
@@ -51,10 +55,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         super.postHandle(request, response, handler, modelAndView);
+        log.info("postHandle");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         super.afterCompletion(request, response, handler, ex);
+        log.info("afterCompletion");
+        flag =false;
     }
 }

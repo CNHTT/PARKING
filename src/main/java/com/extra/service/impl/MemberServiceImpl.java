@@ -55,5 +55,10 @@ public class MemberServiceImpl implements MemberService {
         return BeanUtils.toResponseResult(memberDao.selectMemberDelFromLPM(companyUUID,lpm));
     }
 
+    @Override
+    public boolean addMember(MemberBean memberBean) {
+        return memberDao.insertMember(memberBean)!=0;
+    }
+
 
 }

@@ -18,4 +18,6 @@ public interface MemberService {
     ResponsePage<MemberBean> loadMemberDelList(String companyUUID, Integer pageName);
 
     ResponsePage<MemberBean> loadMemberDelFromLPM(String companyUUID, String lpm);
+
+    boolean addMember(MemberBean memberBean);
 }
