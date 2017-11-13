@@ -22,7 +22,7 @@
     <i class="Hui-iconfont">&#xe67f;</i>
     HOME <span class="c-gray en">&gt;</span>
     Device Management <span class="c-gray en">&gt;</span>
-    Device List<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('/data_list');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    Device List<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('${pageContext.request.contextPath}/admin_list');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 
 <div class="page-container">
 

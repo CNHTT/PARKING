@@ -14,4 +14,12 @@ public interface TransactionDao {
     ArrayList<RechargeBean> selectRechargeListByLPM(@Param("companyUUID") String companyUUID, @Param("lpm")String lpm);
 
     ArrayList<ConsumptionBean> selectConsumptionByLPM(String companyUUID);
+
+    int insertRecharge(RechargeBean rechargeBean);
+
+    int insertConsumptionBean(ConsumptionBean consumptionBean);
+
+    int insertRechargeList(ArrayList<RechargeBean> list);
+
+    int insertConsumptionList(ArrayList<ConsumptionBean> list);
 }

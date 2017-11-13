@@ -1,11 +1,15 @@
 package com.extra.controller;
 
+import com.extra.model.ConsumptionBean;
 import com.extra.model.ManagerBean;
 import com.extra.model.ParkingLotBean;
 import com.extra.model.ParkingRecordBean;
+import com.extra.model.response.ResponseObj;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.ParkingService;
+import com.extra.utils.GsonUtils;
 import com.extra.utils.TimeUtils;
+import com.google.gson.reflect.TypeToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.ArrayList;
 
 import static com.extra.utils.SessionUtils.SESSION_MANAGER;
 
@@ -178,5 +184,114 @@ public class ParkingController extends  BaseController {
 
     @RequestMapping("success")
     public String success(){return "add-success";}
+
+
+
+
+
+    @RequestMapping("parking.p")
+    @ResponseBody
+    public String addParkingRecord(String data){
+        ResponseObj<ParkingRecordBean> result = new ResponseObj<>();
+        ParkingRecordBean parkingRecordBean;
+        try {
+            log.info(data);
+            parkingRecordBean = new GsonUtils().toBean(data,ParkingRecordBean.class);
+            if (parkingService.addParkingRecordBean(parkingRecordBean)){
+                result.setCode(ResponseObj.OK);
+                result.setMsg("add success");
+            }
+            else {
+
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please check if the s exists!!");
+            }
+        }catch (Exception e){
+
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
+
+    }
+
+
+    @RequestMapping("parkingList.p")
+    @ResponseBody
+    public String addParkingRecordList(String data){
+        ResponseObj<ParkingRecordBean> result = new ResponseObj<>();
+        ArrayList<ParkingRecordBean> parkingRecordBeans;
+        try {
+            log.info(data);
+            parkingRecordBeans = new GsonUtils().fromJson(data,new TypeToken<ArrayList<ParkingRecordBean>>(){}.getType());
+            if (parkingService.addParkingRecordList(parkingRecordBeans)){
+                result.setCode(ResponseObj.OK);
+                result.setMsg("add success");
+            }
+            else {
+
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please check if the s exists!!");
+            }
+        }catch (Exception e){
+
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
+    }
+
+
+    @RequestMapping("parkingEntry.p")
+    @ResponseBody
+    public String addParkingEntry(String data){
+        ResponseObj<ParkingRecordBean> result = new ResponseObj<>();
+        ParkingRecordBean parkingRecordBean;
+        try {
+            log.info(data);
+            parkingRecordBean = new GsonUtils().toBean(data,ParkingRecordBean.class);
+            if (parkingService.addParkingRecordEntry(parkingRecordBean)){
+                result.setCode(ResponseObj.OK);
+                result.setMsg("add success");
+            }
+            else {
+
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please check if the s exists!!");
+            }
+        }catch (Exception e){
+
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
+
+    }
+
+
+    @RequestMapping("parkingEntryList.p")
+    @ResponseBody
+    public String addParkingEntryList(String data){
+        ResponseObj<ParkingRecordBean> result = new ResponseObj<>();
+        ArrayList<ParkingRecordBean> parkingRecordBeans;
+        try {
+            log.info(data);
+            parkingRecordBeans = new GsonUtils().fromJson(data,new TypeToken<ArrayList<ParkingRecordBean>>(){}.getType());
+            if (parkingService.addParkingRecordEntryList(parkingRecordBeans)){
+                result.setCode(ResponseObj.OK);
+                result.setMsg("add success");
+            }
+            else {
+
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please check if the s exists!!");
+            }
+        }catch (Exception e){
+
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
+    }
 
 }

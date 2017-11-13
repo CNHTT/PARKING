@@ -21,7 +21,7 @@
     <i class="Hui-iconfont">&#xe67f;</i>
         HOME <span class="c-gray en">&gt;</span>
         Transaction Record <span class="c-gray en">&gt;</span>
-        Recharge Record<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('/recharge_page');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+        Recharge Record<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('${pageContext.request.contextPath}/recharge_page');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 
     <div class="page-container">
         <div class="text-c">

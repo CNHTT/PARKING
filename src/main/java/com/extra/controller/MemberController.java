@@ -114,7 +114,7 @@ public class MemberController extends  BaseController {
     @RequestMapping(value = "checkMemBer.p")
     @ResponseBody
     private String loadCheckMemberByUUID(String uuid){
-      ResponseObj<CompanyInformationBean> result = new ResponseObj<>();
+      ResponseObj<MemberBean> result = new ResponseObj<>();
       MemberBean memberBean;
       try{
         memberBean = memberService.loadMemberFromUUID(uuid);

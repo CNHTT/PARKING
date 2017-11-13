@@ -18,7 +18,7 @@
 <body>
 <nav class="breadcrumb">
     <i class="Hui-iconfont">&#xe67f;</i>Home <span class="c-gray en">&gt;</span> Parking Lot management <span class="c-gray en">&gt;</span> PARKING LOT
-    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="Refresh" ><i class="Hui-iconfont">&#xe68f;</i></a>
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('${pageContext.request.contextPath}/parking_management');" title="Refresh" ><i class="Hui-iconfont">&#xe68f;</i></a>
 </nav>
 <!--http://www.layui.com/demo/laydate.html-->
 <div class="page-container">

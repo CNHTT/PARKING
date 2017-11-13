@@ -17,10 +17,10 @@
     <title>Administrator List</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> HOME <span class="c-gray en">&gt;</span> Administrator Management <span class="c-gray en">&gt;</span> Administrator List <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> HOME <span class="c-gray en">&gt;</span> Administrator Management <span class="c-gray en">&gt;</span> Administrator List <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('${pageContext.request.contextPath}/admin_list');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
     <div class="text-c">
-        <form action="admin/name" class="form form-horizontal" method="post">
+        <form action="${pageContext.request.contextPath}/admin/name" class="form form-horizontal" method="post">
             <input type="text" class="input-text" style="width:250px" placeholder="Enter the administrator name" id="name" name="name">
             <button type="submit" class="btn btn-success" id="submit"   name="submit"><i class="Hui-iconfont">&#xe665;</i> SEARCH</button>
         </form>
@@ -100,7 +100,7 @@
                     <button class="layui-btn layui-btn-disabled layui-btn-small" >${n}</button>
                 </c:if>
             </c:forEach>
-            <c:if test="${adminList.pageNo!=adminList.pages}">
+            <c:if test="${adminList.pages!=1}">
                 <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/admin_list?pageName=${adminList.pageNo+1}">NEXT</button>
                 <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/admin_list?pageName=${adminList.total}">[END]</button>
             </c:if>

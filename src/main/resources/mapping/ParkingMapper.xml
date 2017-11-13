@@ -136,4 +136,98 @@
             WHERE park_parking.companyUuid = #{companyUUID} AND type = 0 AND park_member.lpm = #{lpm} ORDER BY park_parking.id DESC
           </select>
 
+
+    <insert id="insertParkingRecord" parameterType="com.extra.model.ParkingRecordBean">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        INSERT INTO  park_parking(
+        tsn, type, memberUuid,
+        operateUuid, deviceSn, companyUuid,
+        amount, enterLongTime, exitLongTime,
+        parkingTime, intTime, enterTime,
+        exitTime, createTime
+        )
+        VALUES
+        {
+          #{tsn},#{type},#{memberUuid},
+          #{operateUuid},#{deviceSn},#{companyUuid},
+          #{amount},#{enterLongTime},#{exitLongTime},
+          #{parkingTime},#{intTime},#{enterTime},
+          #{exitTime},#{createTime}
+        }
+    </insert>
+
+
+    <insert id="insertParkingRecordList" parameterType="java.util.List">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        INSERT INTO  park_parking(
+        tsn, type, memberUuid,
+        operateUuid, deviceSn, companyUuid,
+        amount, enterLongTime, exitLongTime,
+        parkingTime, intTime, enterTime,
+        exitTime, createTime
+        )
+
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+        {
+          #{item.tsn},#{item.type},#{item.memberUuid},
+          #{item.operateUuid},#{item.deviceSn},#{item.companyUuid},
+          #{item.amount},#{item.enterLongTime},#{item.exitLongTime},
+          #{item.parkingTime},#{item.intTime},#{item.enterTime},
+          #{item.exitTime},#{item.createTime}
+        }
+        </foreach>
+    </insert>
+
+
+    <insert id="insertParkingEntry" parameterType="com.extra.model.ParkingRecordBean">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        INSERT INTO  park_parking(
+        tsn, type, memberUuid,
+        operateUuid, deviceSn, companyUuid,
+        enterLongTime, enterTime,createTime
+        )
+        VALUES
+        {
+          #{tsn},#{type},#{memberUuid},
+          #{operateUuid},#{deviceSn},#{companyUuid},
+          #{enterLongTime},#{enterTime},#{createTime}
+        }
+    </insert>
+
+
+    <insert id="insertParkingRecordEntryList" parameterType="java.util.List">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+
+        INSERT INTO  park_parking(
+        tsn, type, memberUuid,
+        operateUuid, deviceSn, companyUuid,
+        enterLongTime, enterTime,createTime
+        )
+
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+        {
+          #{item.tsn},#{item.type},#{item.memberUuid},
+          #{item.operateUuid},#{item.deviceSn},#{item.companyUuid},
+          #{item.enterLongTime},#{item.enterTime},#{item.createTime}
+        }
+        </foreach>
+    </insert>
+
+
+
+
+
 </mapper>

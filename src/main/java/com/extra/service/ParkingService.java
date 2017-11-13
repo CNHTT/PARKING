@@ -27,4 +27,12 @@ public interface ParkingService {
     ResponsePage<ParkingRecordBean> loadAllParkingCompletedList(String companyUUID, Integer pageName);
 
     ResponsePage<ParkingRecordBean> loadAllParkingCompletedByLpmList(String companyUUID, Integer pageName, String lpm);
+
+    boolean addParkingRecordBean(ParkingRecordBean parkingRecordBean);
+
+    boolean addParkingRecordList(ArrayList<ParkingRecordBean> parkingRecordBeans);
+
+    boolean addParkingRecordEntry(ParkingRecordBean parkingRecordBean);
+
+    boolean addParkingRecordEntryList(ArrayList<ParkingRecordBean> parkingRecordBeans);
 }

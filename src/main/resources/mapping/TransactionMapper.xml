@@ -65,4 +65,79 @@
                 WHERE  park_recharge.companyUuid = #{companyUUID} AND park_member.lpm =#{lpm} ORDER BY id DESC
     </select>
 
+    <insert id="insertConsumptionBean" parameterType="com.extra.model.ConsumptionBean">
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO park_consumption(
+        memberUuid, memberLPM, memberLPM,
+        rAmont, bAmont, aAmont,
+        operateNumber, operateUuid, deviceSN,
+        deviceNumber, companyUuid)
+        VALUES
+        (
+        #{memberUuid},#{memberLPM},#{memberLPM},
+        #{rAmount},#{bAmont},#{aAmont},
+        #{operateNumber},#{operateUuid},#{deviceSN},
+        #{deviceNumber},#{companyUuid}
+        )
+    </insert>
+    <insert id="insertConsumptionList" parameterType="java.util.List">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT
+            LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO park_consumption(
+        memberUuid, memberLPM, memberLPM,
+        rAmont, bAmont, aAmont,
+        operateNumber, operateUuid, deviceSN,
+        deviceNumber, companyUuid)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.memberUuid},#{item.memberLPM},#{item.memberLPM},
+            #{item.rAmount},#{item.bAmont},#{item.aAmont},
+            #{item.operateNumber},#{item.operateUuid},#{item.deviceSN},
+            #{item.deviceNumber},#{item.companyUuid}
+            )
+        </foreach>
+    </insert>
+
+
+    <insert id="insertRecharge" parameterType="com.extra.model.RechargeBean">
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO park_recharge(
+        memberUuid, memberLPM, tsn,
+        rAmont, bAmont, aAmont,
+        operateNumber, operateUuid,deviceSN,
+        deviceNumber, companyUuid) VALUES
+        (
+        #{memberUuid},#{memberLPM},#{memberLPM},
+        #{rAmount},#{bAmont},#{aAmont},
+        #{operateNumber},#{operateUuid},#{deviceSN},
+        #{deviceNumber},#{companyUuid}
+        )
+    </insert>
+    <insert id="insertRechargeList" parameterType="java.util.List">
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO park_recharge(
+        memberUuid, memberLPM, tsn,
+        rAmont, bAmont, aAmont,
+        operateNumber, operateUuid,deviceSN,
+        deviceNumber, companyUuid) VALUES
+
+        <foreach collection="list" index="index" item="item" separator=",">
+             (
+                 #{item.memberUuid},#{item.memberLPM},#{item.memberLPM},
+                 #{item.rAmount},#{item.bAmont},#{item.aAmont},
+                 #{item.operateNumber},#{item.operateUuid},#{item.deviceSN},
+                 #{item.deviceNumber},#{item.companyUuid}
+                 )
+        </foreach>
+    </insert>
+
 </mapper>

@@ -22,7 +22,7 @@
     <i class="Hui-iconfont">&#xe67f;</i>
     HOME <span class="c-gray en">&gt;</span>
     Parking Record <span class="c-gray en">&gt;</span>
-    Completed Record<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('/parking_completed');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    Completed Record<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('${pageContext.request.contextPath}/parking_completed');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 
 <div class="page-container">
     <div class="text-c">
@@ -105,6 +105,8 @@
         </tbody>
     </table>
 
+    <c:if test="${page.dataList!=null}">
+
     <c:if test="${page.pageNo!=0}">
         <div class="page-container text-c">
 
@@ -129,6 +131,7 @@
         </div>
     </c:if>
 
+    </c:if>
 
 
 

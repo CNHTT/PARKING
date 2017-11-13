@@ -22,7 +22,7 @@
     <i class="Hui-iconfont">&#xe67f;</i>
     HOME <span class="c-gray en">&gt;</span>
     Parking Record <span class="c-gray en">&gt;</span>
-    Parking Record<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('/parking_records');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    Parking Record<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('${pageContext.request.contextPath}/parking_records');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 
 <div class="page-container">
     <div class="text-c">

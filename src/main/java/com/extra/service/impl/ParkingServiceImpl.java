@@ -89,4 +89,24 @@ public class ParkingServiceImpl implements ParkingService {
         PageHelper.startPage(pageName,10);
         return BeanUtils.toResponseResult(parkingDao.selectParkingCompletedByLpmList(companyUUID,lpm));
     }
+
+    @Override
+    public boolean addParkingRecordBean(ParkingRecordBean parkingRecordBean) {
+        return parkingDao.insertParkingRecord(parkingRecordBean)!=0;
+    }
+
+    @Override
+    public boolean addParkingRecordList(ArrayList<ParkingRecordBean> parkingRecordBeans) {
+        return parkingDao.insertParkingRecordList(parkingRecordBeans)!=0;
+    }
+
+    @Override
+    public boolean addParkingRecordEntry(ParkingRecordBean parkingRecordBean) {
+        return parkingDao.insertParkingEntry(parkingRecordBean)!=0;
+    }
+
+    @Override
+    public boolean addParkingRecordEntryList(ArrayList<ParkingRecordBean> parkingRecordBeans) {
+        return parkingDao.insertParkingRecordEntryList(parkingRecordBeans)!=0;
+    }
 }

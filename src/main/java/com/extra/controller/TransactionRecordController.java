@@ -1,18 +1,21 @@
 package com.extra.controller;
 
-import com.extra.model.ConsumptionBean;
-import com.extra.model.ManagerBean;
-import com.extra.model.MemberBean;
-import com.extra.model.RechargeBean;
+import com.extra.model.*;
+import com.extra.model.response.ResponseObj;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.TransactionService;
+import com.extra.utils.GsonUtils;
+import com.google.gson.reflect.TypeToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.ArrayList;
 
 import static com.extra.utils.DataUtils.isEmpty;
 import static com.extra.utils.SessionUtils.SESSION_MANAGER;
@@ -77,6 +80,114 @@ public class TransactionRecordController extends BaseController {
         }
         model.addAttribute("page",page);
         return "cost-consumption";
+    }
+
+
+    @RequestMapping("recharge.p")
+    @ResponseBody
+    public String addRechargeRecord(String data){
+        ResponseObj<RechargeBean> result = new ResponseObj<>();
+        RechargeBean rechargeBean;
+        try {
+            log.info(data);
+            rechargeBean = new GsonUtils().toBean(data,RechargeBean.class);
+            if (transactionService.addRecharge(rechargeBean)){
+                result.setCode(ResponseObj.OK);
+                result.setMsg("add success");
+            }
+            else {
+
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please check if the s exists!!");
+            }
+        }catch (Exception e){
+
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
+
+    }
+    @RequestMapping("rechargeList.p")
+    @ResponseBody
+    public String addRechargeRecordList(String data){
+        ResponseObj<RechargeBean> result = new ResponseObj<>();
+        ArrayList<RechargeBean> rechargeBean;
+        try {
+            log.info(data);
+            rechargeBean = new GsonUtils().fromJson(data,new TypeToken<ArrayList<RechargeBean>>(){}.getType());
+            if (transactionService.addRechargeList(rechargeBean)){
+                result.setCode(ResponseObj.OK);
+                result.setMsg("add success");
+            }
+            else {
+
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please check if the s exists!!");
+            }
+        }catch (Exception e){
+
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
+
+    }
+
+
+
+
+    @RequestMapping("consumption.p")
+    @ResponseBody
+    public String addConsumptionRecord(String data){
+        ResponseObj<ConsumptionBean> result = new ResponseObj<>();
+        ConsumptionBean consumptionBean;
+        try {
+            log.info(data);
+            consumptionBean = new GsonUtils().toBean(data,ConsumptionBean.class);
+            if (transactionService.addConsumption(consumptionBean)){
+                result.setCode(ResponseObj.OK);
+                result.setMsg("add success");
+            }
+            else {
+
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please check if the s exists!!");
+            }
+        }catch (Exception e){
+
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
+
+    }
+
+
+    @RequestMapping("consumptionList.p")
+    @ResponseBody
+    public String addConsumptionRecordList(String data){
+        ResponseObj<ConsumptionBean> result = new ResponseObj<>();
+        ArrayList<ConsumptionBean> consumptionBean;
+        try {
+            log.info(data);
+            consumptionBean = new GsonUtils().fromJson(data,new TypeToken<ArrayList<ConsumptionBean>>(){}.getType());
+            if (transactionService.addConsumptionList(consumptionBean)){
+                result.setCode(ResponseObj.OK);
+                result.setMsg("add success");
+            }
+            else {
+
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please check if the s exists!!");
+            }
+        }catch (Exception e){
+
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
+
     }
 
 

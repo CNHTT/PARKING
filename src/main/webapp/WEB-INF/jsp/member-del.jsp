@@ -22,7 +22,7 @@
     <i class="Hui-iconfont">&#xe67f;</i>
     HOME <span class="c-gray en">&gt;</span>
     Member Management <span class="c-gray en">&gt;</span>
-    Deleted Member <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('/member_del');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    Deleted Member <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('${pageContext.request.contextPath}/member_del');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 
 
 <div class="page-container">
