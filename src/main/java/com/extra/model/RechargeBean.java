@@ -31,14 +31,6 @@ public class RechargeBean implements Serializable{
     private Date createTime;
 
 
-    public String getMemberName() {
-        return memberName;
-    }
-
-    public void setMemberName(String memberName) {
-        this.memberName = memberName;
-    }
-
     public Long getId() {
         return id;
     }
@@ -63,6 +55,14 @@ public class RechargeBean implements Serializable{
         this.memberLPM = memberLPM;
     }
 
+    public String getMemberName() {
+        return memberName;
+    }
+
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
+    }
+
     public String getTsn() {
         return tsn;
     }
@@ -70,8 +70,6 @@ public class RechargeBean implements Serializable{
     public void setTsn(String tsn) {
         this.tsn = tsn;
     }
-
-
 
     public double getrAmount() {
         return rAmount;

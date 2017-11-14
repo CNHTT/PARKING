@@ -22,6 +22,7 @@ public class ParkingRecordBean implements Serializable{
     private String operateUuid;
     private String deviceSN;
     private String deviceNumber;
+    private String companyUuid;
 
 
     private String parkingLotName;
@@ -44,6 +45,14 @@ public class ParkingRecordBean implements Serializable{
     private long parkingTime;
     private int intTime;
 
+
+    public String getCompanyUuid() {
+        return companyUuid;
+    }
+
+    public void setCompanyUuid(String companyUuid) {
+        this.companyUuid = companyUuid;
+    }
 
     public String getParkingLotName() {
         return parkingLotName;

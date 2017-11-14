@@ -93,12 +93,12 @@
     <c:if test="${page.pages!=0}">
         <div class="page-container text-c">
             <c:if test="${page.pageNo!=1}">
-                <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_del?pageName=1">[FIRST]</button>
-                <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_del?pageName=${page.pageNo-1}">PREV</button>
+                <a class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_del?pageName=1">[FIRST]</a>
+                <a class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_del?pageName=${page.pageNo-1}">PREV</a>
             </c:if>
             <c:forEach begin="1" end="${page.pages}" var="n">
                 <c:if test="${page.pageNo!=n }">
-                    <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_del?pageName=${n}"></button>'
+                    <a class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_del?pageName=${n}">${n}</a>
                 </c:if>
                 <c:if test="${page.pageNo==n }">
                     <button class="layui-btn layui-btn-disabled layui-btn-small" >${n}</button>
@@ -107,8 +107,8 @@
 
             <c:if test="${page.pageNo!=0}">
                 <c:if test="${page.pageNo!=page.pages}">
-                    <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_del?pageName=${page.pageNo+1}">NEXT</button>
-                    <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_del?pageName=${page.total}">[END]</button>
+                    <a class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_del?pageName=${page.pageNo+1}">NEXT</a>
+                    <a class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_del?pageName=${page.total}">[END]</a>
                 </c:if>
             </c:if>
         </div>

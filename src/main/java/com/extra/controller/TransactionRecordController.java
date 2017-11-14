@@ -85,12 +85,14 @@ public class TransactionRecordController extends BaseController {
 
     @RequestMapping("recharge.p")
     @ResponseBody
-    public String addRechargeRecord(String data){
+    public String addRechargeRecord(String data,Double amount){
         ResponseObj<RechargeBean> result = new ResponseObj<>();
         RechargeBean rechargeBean;
         try {
             log.info(data);
             rechargeBean = new GsonUtils().toBean(data,RechargeBean.class);
+
+            transactionService.updateAmount(amount,rechargeBean.getMemberUuid());
             if (transactionService.addRecharge(rechargeBean)){
                 result.setCode(ResponseObj.OK);
                 result.setMsg("add success");

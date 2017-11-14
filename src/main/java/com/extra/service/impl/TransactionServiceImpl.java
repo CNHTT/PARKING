@@ -63,4 +63,9 @@ public class TransactionServiceImpl implements TransactionService {
     public boolean addConsumptionList(ArrayList<ConsumptionBean> consumptionBean) {
         return transactionDao.insertConsumptionList(consumptionBean)!=0;
     }
+
+    @Override
+    public void updateAmount(Double amount, String memberUuid) {
+        transactionDao.updateAmount(amount,memberUuid);
+    }
 }

@@ -98,7 +98,7 @@
             FROM park_parking LEFT OUTER JOIN park_member ON park_parking.memberUuid = park_member.uuid
 
               LEFT OUTER JOIN  parking_lot ON  park_parking.parkingUuid = parking_lot.uuid
-            WHERE park_parking.companyUuid = #{companyUUID} AND type = 1 AND park_member.lpm = #{lpm} ORDER BY park_parking.id DESC
+            WHERE park_parking.companyUuid = #{companyUUID} AND type = 0 AND park_member.lpm = #{lpm} ORDER BY park_parking.id DESC
           </select>
     <select id="selectParkingCompletedAllList" resultType="com.extra.model.ParkingRecordBean">
           SELECT
@@ -115,7 +115,7 @@
             FROM park_parking LEFT OUTER JOIN park_member ON park_parking.memberUuid = park_member.uuid
 
               LEFT OUTER JOIN  parking_lot ON  park_parking.parkingUuid = parking_lot.uuid
-            WHERE park_parking.companyUuid = #{companyUUID} AND type = 0 ORDER BY park_parking.id DESC
+            WHERE park_parking.companyUuid = #{companyUUID} AND type = 1 ORDER BY park_parking.id DESC
           </select>
 
     <select id="selectParkingCompletedByLpmList" resultType="com.extra.model.ParkingRecordBean">
@@ -137,6 +137,24 @@
           </select>
 
 
+    <select id="selectParkingRecordByMemberUUID" resultType="com.extra.model.ParkingRecordBean">
+        SELECT
+              park_parking.tsn,
+              park_parking.memberUuid,
+              park_member.name as memberName,
+              park_member.lpm  as memberLpm,
+              park_parking.amount,
+              enterTime,exitTime,
+              parkingTime,
+              parking_lot.number AS parkingLotName,
+              park_parking.parkingUuid
+
+            FROM park_parking LEFT OUTER JOIN park_member ON park_parking.memberUuid = park_member.uuid
+
+              LEFT OUTER JOIN  parking_lot ON  park_parking.parkingUuid = parking_lot.uuid
+            WHERE park_parking.memberUuid = #{uuid} AND type = 1  ORDER BY park_parking.id DESC
+    </select>
+
     <insert id="insertParkingRecord" parameterType="com.extra.model.ParkingRecordBean">
         <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
             SELECT LAST_INSERT_ID()
@@ -147,16 +165,16 @@
         operateUuid, deviceSn, companyUuid,
         amount, enterLongTime, exitLongTime,
         parkingTime, intTime, enterTime,
-        exitTime, createTime
+        exitTime, createTime,parkingUuid
         )
         VALUES
-        {
+        (
           #{tsn},#{type},#{memberUuid},
-          #{operateUuid},#{deviceSn},#{companyUuid},
+          #{operateUuid},#{deviceSN},#{companyUuid},
           #{amount},#{enterLongTime},#{exitLongTime},
           #{parkingTime},#{intTime},#{enterTime},
-          #{exitTime},#{createTime}
-        }
+          #{exitTime},#{createTime},#{parkingUuid}
+        )
     </insert>
 
 
@@ -170,18 +188,18 @@
         operateUuid, deviceSn, companyUuid,
         amount, enterLongTime, exitLongTime,
         parkingTime, intTime, enterTime,
-        exitTime, createTime
+        exitTime, createTime,parkingUuid
         )
 
         VALUES
         <foreach collection="list" index="index" item="item" separator=",">
-        {
+            (
           #{item.tsn},#{item.type},#{item.memberUuid},
-          #{item.operateUuid},#{item.deviceSn},#{item.companyUuid},
+          #{item.operateUuid},#{item.deviceSN},#{item.companyUuid},
           #{item.amount},#{item.enterLongTime},#{item.exitLongTime},
           #{item.parkingTime},#{item.intTime},#{item.enterTime},
-          #{item.exitTime},#{item.createTime}
-        }
+          #{item.exitTime},#{item.createTime},#{item.parkingUuid}
+            )
         </foreach>
     </insert>
 
@@ -194,14 +212,14 @@
         INSERT INTO  park_parking(
         tsn, type, memberUuid,
         operateUuid, deviceSn, companyUuid,
-        enterLongTime, enterTime,createTime
+        enterLongTime, enterTime,createTime,parkingUuid
         )
         VALUES
-        {
+        (
           #{tsn},#{type},#{memberUuid},
-          #{operateUuid},#{deviceSn},#{companyUuid},
-          #{enterLongTime},#{enterTime},#{createTime}
-        }
+          #{operateUuid},#{deviceSN},#{companyUuid},
+          #{enterLongTime},#{enterTime},#{createTime},#{parkingUuid}
+        )
     </insert>
 
 
@@ -213,16 +231,16 @@
         INSERT INTO  park_parking(
         tsn, type, memberUuid,
         operateUuid, deviceSn, companyUuid,
-        enterLongTime, enterTime,createTime
+        enterLongTime, enterTime,createTime,parkingUuid
         )
 
         VALUES
         <foreach collection="list" index="index" item="item" separator=",">
-        {
+            (
           #{item.tsn},#{item.type},#{item.memberUuid},
-          #{item.operateUuid},#{item.deviceSn},#{item.companyUuid},
-          #{item.enterLongTime},#{item.enterTime},#{item.createTime}
-        }
+          #{item.operateUuid},#{item.deviceSN},#{item.companyUuid},
+          #{item.enterLongTime},#{item.enterTime},#{item.createTime},#{item.parkingUuid}
+            )
         </foreach>
     </insert>
 

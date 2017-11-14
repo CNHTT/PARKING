@@ -43,4 +43,5 @@ public interface ParkingDao {
     int insertParkingRecordEntryList(ArrayList<ParkingRecordBean> parkingRecordBeans);
 
 
+    ArrayList<ParkingLotBean> selectParkingRecordByMemberUUID(String uuid);
 }

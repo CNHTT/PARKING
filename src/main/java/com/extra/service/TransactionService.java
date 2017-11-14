@@ -18,4 +18,6 @@ public interface TransactionService {
     boolean addRechargeList(ArrayList<RechargeBean> rechargeBean);
 
     boolean addConsumptionList(ArrayList<ConsumptionBean> consumptionBean);
+
+    void updateAmount(Double amount, String memberUuid);
 }

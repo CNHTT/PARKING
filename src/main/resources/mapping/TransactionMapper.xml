@@ -71,13 +71,13 @@
         </selectKey>
         INSERT INTO park_consumption(
         memberUuid, memberLPM, memberLPM,
-        rAmont, bAmont, aAmont,
+        rAmount, bAmount, aAmount,
         operateNumber, operateUuid, deviceSN,
         deviceNumber, companyUuid)
         VALUES
         (
-        #{memberUuid},#{memberLPM},#{memberLPM},
-        #{rAmount},#{bAmont},#{aAmont},
+        #{memberUuid},#{memberLPM},#{tsn},
+        #{rAmount},#{bAmount},#{aAmount},
         #{operateNumber},#{operateUuid},#{deviceSN},
         #{deviceNumber},#{companyUuid}
         )
@@ -89,14 +89,14 @@
         </selectKey>
         INSERT INTO park_consumption(
         memberUuid, memberLPM, memberLPM,
-        rAmont, bAmont, aAmont,
+        rAmount, bAmount, aAmount,
         operateNumber, operateUuid, deviceSN,
         deviceNumber, companyUuid)
         VALUES
         <foreach collection="list" index="index" item="item" separator=",">
             (
-            #{item.memberUuid},#{item.memberLPM},#{item.memberLPM},
-            #{item.rAmount},#{item.bAmont},#{item.aAmont},
+            #{item.memberUuid},#{item.memberLPM},#{item.tsn},
+            #{item.rAmount},#{item.bAmount},#{item.aAmount},
             #{item.operateNumber},#{item.operateUuid},#{item.deviceSN},
             #{item.deviceNumber},#{item.companyUuid}
             )
@@ -110,12 +110,12 @@
         </selectKey>
         INSERT INTO park_recharge(
         memberUuid, memberLPM, tsn,
-        rAmont, bAmont, aAmont,
+        rAmount, bAmount, aAmount,
         operateNumber, operateUuid,deviceSN,
         deviceNumber, companyUuid) VALUES
         (
-        #{memberUuid},#{memberLPM},#{memberLPM},
-        #{rAmount},#{bAmont},#{aAmont},
+        #{memberUuid},#{memberLPM},#{tsn},
+        #{rAmount},#{bAmount},#{aAmount},
         #{operateNumber},#{operateUuid},#{deviceSN},
         #{deviceNumber},#{companyUuid}
         )
@@ -126,18 +126,24 @@
         </selectKey>
         INSERT INTO park_recharge(
         memberUuid, memberLPM, tsn,
-        rAmont, bAmont, aAmont,
+        rAmount, bAmount, aAmount,
         operateNumber, operateUuid,deviceSN,
         deviceNumber, companyUuid) VALUES
 
         <foreach collection="list" index="index" item="item" separator=",">
              (
-                 #{item.memberUuid},#{item.memberLPM},#{item.memberLPM},
-                 #{item.rAmount},#{item.bAmont},#{item.aAmont},
+                 #{item.memberUuid},#{item.memberLPM},#{item.tsn},
+                 #{item.rAmount},#{item.bAmount},#{item.aAmount},
                  #{item.operateNumber},#{item.operateUuid},#{item.deviceSN},
                  #{item.deviceNumber},#{item.companyUuid}
                  )
         </foreach>
     </insert>
+
+    <update id="updateAmount" >
+UPDATE  park_member SET  balance =park_member.balance + #{amount}
+WHERE uuid = #{uuid}
+    </update>
+
 
 </mapper>

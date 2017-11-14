@@ -7,18 +7,21 @@ import com.extra.model.ParkingRecordBean;
 import com.extra.model.response.ResponseObj;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.ParkingService;
+import com.extra.utils.DataUtils;
 import com.extra.utils.GsonUtils;
 import com.extra.utils.TimeUtils;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.extra.utils.SessionUtils.SESSION_MANAGER;
 
@@ -226,6 +229,7 @@ public class ParkingController extends  BaseController {
             parkingRecordBeans = new GsonUtils().fromJson(data,new TypeToken<ArrayList<ParkingRecordBean>>(){}.getType());
             if (parkingService.addParkingRecordList(parkingRecordBeans)){
                 result.setCode(ResponseObj.OK);
+
                 result.setMsg("add success");
             }
             else {
@@ -293,5 +297,35 @@ public class ParkingController extends  BaseController {
         }
         return new GsonUtils().toJson(result);
     }
+
+    @RequestMapping(value = "parkingRecordList.p" ,method =RequestMethod.POST)
+    @ResponseBody
+    public String  loadParkingRecordList(String memberUUid){
+        ArrayList<ParkingLotBean> parkingRecordBeans;
+        ResponseObj<ArrayList<ParkingLotBean>> result = new ResponseObj<>();
+        try {
+            log.info(memberUUid);
+
+            parkingRecordBeans = parkingService.loadParkingRecordByMember(memberUUid);
+
+            if (!DataUtils.isEmpty(parkingRecordBeans)){
+                result.setCode(ResponseObj.OK);
+                result.setData(parkingRecordBeans);
+                result.setMsg("add success");
+            }
+            else {
+
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please check if the s exists!!");
+            }
+        }catch (Exception e){
+
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
+    }
+
+
 
 }

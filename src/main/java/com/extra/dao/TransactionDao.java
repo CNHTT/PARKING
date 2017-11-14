@@ -22,4 +22,6 @@ public interface TransactionDao {
     int insertRechargeList(ArrayList<RechargeBean> list);
 
     int insertConsumptionList(ArrayList<ConsumptionBean> list);
+
+    void updateAmount(@Param("amount") Double amount, @Param("uuid") String memberUuid);
 }

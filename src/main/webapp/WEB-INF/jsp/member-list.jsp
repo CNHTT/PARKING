@@ -84,7 +84,7 @@
                                         <a style="text-decoration:none" onClick="member_stop(this,${member.uuid})" href="javascript:;" title="stop"><i class="Hui-iconfont">&#xe631;</i></a>
                                     </c:when>
                                     <c:otherwise>
-                                        <a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="start"><i class="Hui-iconfont">&#xe6e1;</i></a>'
+                                        <a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="start"><i class="Hui-iconfont">&#xe6e1;</i></a>
                                     </c:otherwise>
                                 </c:choose>
 
@@ -107,12 +107,12 @@
             <div class="page-container text-c">
 
                     <c:if test="${page.pageNo!=1}">
-                        <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_list?pageName=1">[FIRST]</button>
-                        <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_ist?pageName=${page.pageNo-1}">PREV</button>
+                        <a class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_list?pageName=1">[FIRST]</a>
+                        <a class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_ist?pageName=${page.pageNo-1}">PREV</a>
                     </c:if>
                     <c:forEach begin="1" end="${page.pages}" var="n">
                         <c:if test="${page.pageNo!=n }">
-                            <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_list?pageName=${n}"></button>'
+                            <a class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_list?pageName=${n}">${n}</a>'
                         </c:if>
                         <c:if test="${page.pageNo==n }">
                             <button class="layui-btn layui-btn-disabled layui-btn-small" >${n}</button>
@@ -120,8 +120,8 @@
                     </c:forEach>
                 <c:if test="${page.pages!=1}">
                     <c:if test="${page.pageNo!=page.pages}">
-                        <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_list?pageName=${page.pageNo+1}">NEXT</button>
-                        <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_list?pageName=${page.total}">[END]</button>
+                        <a class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_list?pageName=${page.pageNo+1}">NEXT</a>
+                        <a class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/member_list?pageName=${page.total}">[END]</a>
                     </c:if>
                 </c:if>
             </div>

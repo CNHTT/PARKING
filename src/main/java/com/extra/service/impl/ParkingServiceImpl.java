@@ -109,4 +109,9 @@ public class ParkingServiceImpl implements ParkingService {
     public boolean addParkingRecordEntryList(ArrayList<ParkingRecordBean> parkingRecordBeans) {
         return parkingDao.insertParkingRecordEntryList(parkingRecordBeans)!=0;
     }
+
+    @Override
+    public ArrayList<ParkingLotBean> loadParkingRecordByMember(String memberUUid) {
+        return parkingDao.selectParkingRecordByMemberUUID(memberUUid);
+    }
 }

@@ -89,7 +89,7 @@
             </c:if>
             <c:forEach begin="1" end="${page.pages}" var="n">
                 <c:if test="${page.pageNo!=n }">
-                    <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/parking_records?pageName=${n}"></button>'
+                    <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/parking_records?pageName=${n}"></button>
                 </c:if>
                 <c:if test="${page.pageNo==n }">
                     <button class="layui-btn layui-btn-disabled layui-btn-small" >${n}</button>

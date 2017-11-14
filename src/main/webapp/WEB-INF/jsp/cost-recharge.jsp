@@ -99,7 +99,7 @@
 
     <c:if test="${page.total!=null}">
         <div class="page-container text-c">
-            <c:if test="${page.total!=1}">
+            <c:if test="${page.pages!=1}">
                 <button class="layui-btn layui-btn-warm layui-btn-small"
                         href="${pageContext.request.contextPath}/recharge_page?pageName=1">
                     [FIRST]
@@ -108,10 +108,11 @@
                         href="${pageContext.request.contextPath}/recharge_page?pageName=${page.pageNo-1}">
                     PREV
                 </button>
+            </c:if>
 
                 <c:forEach begin="1" end="${page.pages}" var="n">
                     <c:if test="${page.pageNo!=n }">
-                        <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/recharge_page?pageName=${n}"></button>'
+                        <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/recharge_page?pageName=${n}"></button>
                     </c:if>
                     <c:if test="${page.pageNo==n }">
                         <button class="layui-btn layui-btn-disabled layui-btn-small" >${n}</button>
@@ -125,7 +126,7 @@
                         <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/recharge_page?pageName=${page.total}">[END]</button>
                     </c:if>
                 </c:if>
-            </c:if>
+
 
         </div>
     </c:if>
