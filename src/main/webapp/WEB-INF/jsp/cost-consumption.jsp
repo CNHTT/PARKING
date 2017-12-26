@@ -21,7 +21,7 @@
     <i class="Hui-iconfont">&#xe67f;</i>
     HOME <span class="c-gray en">&gt;</span>
     Transaction Record <span class="c-gray en">&gt;</span>
-    Recharge Record<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('${pageContext.request.contextPath}/parking_completed');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    Recharge Record<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('${pageContext.request.contextPath}/consumption');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 
 <div class="page-container">
     <div class="text-c">
@@ -109,6 +109,8 @@
                     PREV
                 </button>
 
+            </c:if>
+
                 <c:forEach begin="1" end="${page.pages}" var="n">
                     <c:if test="${page.pageNo!=n }">
                         <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/consumption?pageName=${n}"></button>
@@ -125,7 +127,6 @@
                         <button class="layui-btn layui-btn-warm layui-btn-small" href="${pageContext.request.contextPath}/consumption?pageName=${page.total}">[END]</button>
                     </c:if>
                 </c:if>
-            </c:if>
 
         </div>
     </c:if>

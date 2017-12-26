@@ -117,7 +117,7 @@ public class MemberController extends  BaseController {
       ResponseObj<MemberBean> result = new ResponseObj<>();
       MemberBean memberBean;
       try{
-        memberBean = memberService.loadMemberFromUUID(uuid);
+        memberBean = memberService.loadMemberFromCardId(uuid);
         if (isEmpty(memberBean)){
           result.setCode(ResponseObj.EMPUTY);
           result.setMsg("Please check if the device exists!!");
@@ -143,16 +143,18 @@ public class MemberController extends  BaseController {
       try{
         log.info(data);
         memberBean = new GsonUtils().toBean(data,MemberBean.class);
-        if (memberService.addMember(memberBean)){
+        memberService.updateMember(memberBean.getCardId());
+          if (memberService.addMember(memberBean)){
 
-          result.setCode(ResponseObj.OK);
-          result.setData(memberBean);
-        }
-        else {
+            result.setCode(ResponseObj.OK);
+            result.setData(memberBean);
+          }
+          else {
 
-          result.setCode(ResponseObj.EMPUTY);
-          result.setMsg("Please check if the s exists!!");
-        }
+            result.setCode(ResponseObj.EMPUTY);
+            result.setMsg("Please check if the s exists!!");
+          }
+
 
       }catch (Exception e){
         result.setCode(ResponseObj.FAILED);

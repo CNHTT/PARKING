@@ -27,6 +27,10 @@
         SELECT  * FROM park_member
         WHERE uuid = #{uuid}
     </select>
+    <select id="loadMemberFromCardId" resultType="com.extra.model.MemberBean">
+        SELECT  * FROM park_member
+        WHERE cardId = #{uuid}
+    </select>
 
     <insert id="insertMember" parameterType="com.extra.model.MemberBean">
     <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
@@ -35,5 +39,11 @@
         INSERT  INTO park_member(name,sex,phone,email,uuid,cardId,createTime,companyUuid,addManagerUuid,lpm)
         VALUES (#{name},#{sex},#{phone},#{email},#{uuid},#{cardId},#{createTime},#{companyUuid},#{addManagerUuid},#{lpm})
     </insert>
+
+
+
+    <update id="updateMember" parameterType="java.lang.String" >
+        UPDATE park_member SET  cardId = "0" WHERE cardId =#{uuid}
+    </update>
 
 </mapper>

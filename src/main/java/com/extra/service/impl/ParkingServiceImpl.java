@@ -111,7 +111,17 @@ public class ParkingServiceImpl implements ParkingService {
     }
 
     @Override
-    public ArrayList<ParkingLotBean> loadParkingRecordByMember(String memberUUid) {
+    public ArrayList<ParkingRecordBean> loadParkingRecordByMember(String memberUUid) {
         return parkingDao.selectParkingRecordByMemberUUID(memberUUid);
+    }
+
+    @Override
+    public ArrayList<ParkingRecordBean> loadParkingRecordByMemberPrint(String memberUUid) {
+        return parkingDao.selectParkingRecordByMemberPrintUUID(memberUUid);
+    }
+
+    @Override
+    public ArrayList<ParkingRecordBean> loadParkingRecordForUUID(String memberUUid) {
+        return parkingDao.loadParkingRecordForUUID(memberUUid);
     }
 }

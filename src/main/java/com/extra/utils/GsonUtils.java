@@ -82,6 +82,7 @@ public class GsonUtils {
         GsonBuilder gsonBulder = new GsonBuilder();
         gsonBulder.registerTypeAdapter(String.class, STRING);   //所有String类型null替换为字符串“”
         gsonBulder.registerTypeAdapter(int.class, INTEGER); //int类型对float做兼容
+        gsonBulder.setDateFormat("MMM d, yyyy h:mm:ss aa");
 
         //通过反射获取instanceCreators属性
         try {

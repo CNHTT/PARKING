@@ -53,9 +53,9 @@
                 <th>License Plate</th>
                 <th>Name</th>
                 <th>ParkingLot</th>
-                <th>Entry</th>
-                <th>Go Out</th>
-                <th>Time</th>
+                <%--<th>Entry</th>--%>
+                <th>Create</th>
+                <%--<th>PARK TIME(mis)</th>--%>
                 <th>Amount</th>
             </tr>
         </thead>
@@ -75,11 +75,11 @@
                             </u>
                         </td>
                         <td>${record.parkingLotName}</td>
-                        <td>${record.enterTime}</td>
+                        <%--<td>${record.enterTime}</td>--%>
                         <c:choose>
                             <c:when test="${record.type==0}">
                                 <td>${record.exitTime}</td>
-                                <td> ${record.parkingTime}</td>
+                                <%--<td> ${record.parkingTime}</td>--%>
                                 <td>${record.amount}</td>
                             </c:when>
                             <c:otherwise>

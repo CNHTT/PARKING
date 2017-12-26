@@ -51,9 +51,11 @@ public class HomeController extends BaseController {
         StatisticsBean  statisticsBean = new StatisticsBean();
         statisticsList = new ArrayList<>();
         //
-        for (int i = 0; i <5 ; i++) {
-            statisticsList.add(statisticsBean);
-        }
+        statisticsList.add(homeService.getTotalParking());
+        statisticsList.add(homeService.getTodayParking());
+        statisticsList.add(homeService.getYesterdayParking());
+        statisticsList.add(homeService.getThisWeekParking());
+        statisticsList.add(homeService.getThisMonthParking());
         //
         homeBean.setList(statisticsList);
         req.setAttribute("data",homeBean);

@@ -21,6 +21,44 @@
                 LEFT  OUTER JOIN  park_device ON park_recharge.deviceSN  =park_device.sn  LEFT  OUTER JOIN  park_manager ON operateUuid =park_manager.UUID
                 WHERE  park_recharge.companyUuid = #{companyUUID} ORDER BY id DESC
     </select>
+    <select id="loadRechargeRecordList" resultType="com.extra.model.RechargeBean">
+        SELECT
+            park_recharge.id,
+             park_recharge.memberUuid,
+             park_member.lpm as memberLPM,
+              tsn,
+               rAmount,bAmount,aAmount,
+               park_member.name as memberName,
+               operateUuid,
+               park_manager.number as operateNumber,
+                deviceSN,
+                park_device.number as deviceNumber,
+                park_recharge.companyUuid,
+                park_recharge.createTime
+                FROM
+                park_recharge LEFT OUTER  JOIN park_member ON  park_recharge.memberUuid = park_member.uuid
+                LEFT  OUTER JOIN  park_device ON park_recharge.deviceSN  =park_device.sn  LEFT  OUTER JOIN  park_manager ON operateUuid =park_manager.UUID
+                WHERE  park_recharge.companyUuid = #{companyUUID} ORDER BY id DESC LIMIT 0, 10
+    </select>
+    <select id="loadRechargeRecordListByM" resultType="com.extra.model.RechargeBean">
+        SELECT
+            park_recharge.id,
+             park_recharge.memberUuid,
+             park_member.lpm as memberLPM,
+              tsn,
+               rAmount,bAmount,aAmount,
+               park_member.name as memberName,
+               operateUuid,
+               park_manager.number as operateNumber,
+                deviceSN,
+                park_device.number as deviceNumber,
+                park_recharge.companyUuid,
+                park_recharge.createTime
+                FROM
+                park_recharge LEFT OUTER  JOIN park_member ON  park_recharge.memberUuid = park_member.uuid
+                LEFT  OUTER JOIN  park_device ON park_recharge.deviceSN  =park_device.sn  LEFT  OUTER JOIN  park_manager ON operateUuid =park_manager.UUID
+                WHERE  park_recharge.memberUuid = #{companyUUID} ORDER BY id DESC LIMIT 0, 10
+    </select>
 
     <select id="selectConsumptionByLPM" resultType="com.extra.model.ConsumptionBean">
         SELECT
@@ -70,16 +108,16 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
         INSERT INTO park_consumption(
-        memberUuid, memberLPM, memberLPM,
+        memberUuid, memberLPM, tsn,
         rAmount, bAmount, aAmount,
         operateNumber, operateUuid, deviceSN,
-        deviceNumber, companyUuid)
+        deviceNumber, companyUuid,createTime)
         VALUES
         (
         #{memberUuid},#{memberLPM},#{tsn},
         #{rAmount},#{bAmount},#{aAmount},
         #{operateNumber},#{operateUuid},#{deviceSN},
-        #{deviceNumber},#{companyUuid}
+        #{deviceNumber},#{companyUuid},#{createTime}
         )
     </insert>
     <insert id="insertConsumptionList" parameterType="java.util.List">
@@ -143,6 +181,26 @@
     <update id="updateAmount" >
 UPDATE  park_member SET  balance =park_member.balance + #{amount}
 WHERE uuid = #{uuid}
+    </update>
+
+    <update id="upConsumptionAmount" >
+UPDATE  park_member SET  balance =park_member.balance - #{amount}
+WHERE uuid = #{uuid}
+    </update>
+
+
+    <update id="updateParkingRecord"  parameterType="com.extra.model.ParkingRecordBean">
+
+        UPDATE park_parking  SET
+        exitLongTime = #{exitLongTime},
+        exitTime = #{exitTime},
+        intTime = #{intTime},
+        amount = #{amount},
+        type = 0,
+        parkingTime = #{parkingTime},
+        createTime = #{createTime}
+        where tsn = #{tsn}
+
     </update>
 
 

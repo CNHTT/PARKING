@@ -1,6 +1,7 @@
 package com.extra.service;
 
 import com.extra.model.ConsumptionBean;
+import com.extra.model.ParkingRecordBean;
 import com.extra.model.RechargeBean;
 import com.extra.model.response.ResponsePage;
 
@@ -20,4 +21,12 @@ public interface TransactionService {
     boolean addConsumptionList(ArrayList<ConsumptionBean> consumptionBean);
 
     void updateAmount(Double amount, String memberUuid);
+
+    void upConsumptionBean(double v, String memberUuid);
+
+    void updateParkingRecordBean(ParkingRecordBean parkingRecordBean);
+
+    ArrayList<RechargeBean> loadRechargeRecordList(String uuid);
+
+    ArrayList<RechargeBean> loadRechargeRecordListByM(String uuid);
 }

@@ -23,9 +23,7 @@ public class CompanyInformationBean {
     private String UUID;                            //公司UUID
 
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date createTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date modifyTime;
 
 

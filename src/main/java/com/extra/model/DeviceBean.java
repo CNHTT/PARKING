@@ -16,7 +16,6 @@ public class DeviceBean implements Serializable {
     private String number;
     private String uuid;
     private String company;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date createTime;
     private int status;
 

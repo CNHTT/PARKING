@@ -1,9 +1,6 @@
 package com.extra.controller;
 
-import com.extra.model.ConsumptionBean;
-import com.extra.model.ManagerBean;
-import com.extra.model.ParkingLotBean;
-import com.extra.model.ParkingRecordBean;
+import com.extra.model.*;
 import com.extra.model.response.ResponseObj;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.ParkingService;
@@ -254,15 +251,42 @@ public class ParkingController extends  BaseController {
         try {
             log.info(data);
             parkingRecordBean = new GsonUtils().toBean(data,ParkingRecordBean.class);
-            if (parkingService.addParkingRecordEntry(parkingRecordBean)){
-                result.setCode(ResponseObj.OK);
-                result.setMsg("add success");
-            }
-            else {
 
-                result.setCode(ResponseObj.EMPUTY);
-                result.setMsg("Please check if the s exists!!");
+            ArrayList<ParkingRecordBean> parkingRecordBeans=parkingService.loadParkingRecordByMember(parkingRecordBean.getMemberUuid());
+            if (DataUtils.isEmpty(parkingRecordBeans)){
+
+                if (parkingService.addParkingRecordEntry(parkingRecordBean)){
+                    result.setCode(ResponseObj.OK);
+                    result.setMsg("add success");
+                }
+                else {
+
+                    result.setCode(ResponseObj.EMPUTY);
+                    result.setMsg("Please check if the s exists!!");
+                }
+            }else {
+                if (parkingRecordBeans.get(0).getEnterLongTime()-parkingRecordBean.getEnterLongTime()>600000){
+
+
+                    if (parkingService.addParkingRecordEntry(parkingRecordBean)){
+                        result.setCode(ResponseObj.OK);
+                        result.setMsg("add success");
+                    }
+                    else {
+
+                        result.setCode(ResponseObj.EMPUTY);
+                        result.setMsg("Please check if the s exists!!");
+                    }
+                }else {
+
+
+                    result.setCode(ResponseObj.EMPUTY);
+                    result.setMsg("Please check user parking history!!");
+                }
+
             }
+
+
         }catch (Exception e){
 
             result.setCode(ResponseObj.FAILED);
@@ -281,9 +305,33 @@ public class ParkingController extends  BaseController {
         try {
             log.info(data);
             parkingRecordBeans = new GsonUtils().fromJson(data,new TypeToken<ArrayList<ParkingRecordBean>>(){}.getType());
+
             if (parkingService.addParkingRecordEntryList(parkingRecordBeans)){
                 result.setCode(ResponseObj.OK);
                 result.setMsg("add success");
+            }
+            else {
+
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please check if the s exists!!");
+            }
+        }catch (Exception e){
+
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
+    }
+    @RequestMapping("playGame.p")
+    @ResponseBody
+    public String playGame(String value){
+        ResponseObj<String> result = new ResponseObj<>();
+        Pos pos;
+        try {
+            log.info(value);
+            pos = new GsonUtils().fromJson(value,Pos.class);
+            if (DataUtils.isEmpty(pos)){
+                result.setData(pos.getSn());
             }
             else {
 
@@ -301,17 +349,87 @@ public class ParkingController extends  BaseController {
     @RequestMapping(value = "parkingRecordList.p" ,method =RequestMethod.POST)
     @ResponseBody
     public String  loadParkingRecordList(String memberUUid){
-        ArrayList<ParkingLotBean> parkingRecordBeans;
-        ResponseObj<ArrayList<ParkingLotBean>> result = new ResponseObj<>();
+        ArrayList<ParkingRecordBean> parkingRecordBeans;
+        ResponseObj<ArrayList<ParkingRecordBean>> result = new ResponseObj<>();
+        ParkingRecordBean recordBean ;
         try {
             log.info(memberUUid);
 
             parkingRecordBeans = parkingService.loadParkingRecordByMember(memberUUid);
+            if (parkingRecordBeans.size()>4){
+
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("No more transaction");
+
+            }else
+            {
+                if (!DataUtils.isEmpty(parkingRecordBeans)){
+                    recordBean = parkingRecordBeans.get(0);
+                    if (TimeUtils.getCurTimeMills()-recordBean.getEnterLongTime()>60*60*1000){
+
+                        result.setCode(ResponseObj.OK);
+                        result.setData(new ArrayList<>());
+                    }else {
+
+                        result.setCode(ResponseObj.EMPUTY);
+                        result.setMsg("one hour is no more");
+                    }
+
+
+                }
+                else {
+
+                    result.setCode(ResponseObj.OK);
+                    result.setData(new ArrayList<>());
+
+                }
+            }
+
+        }catch (Exception e){
+
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
+    }
+    @RequestMapping(value = "parkingRecordListPrint.p" )
+    @ResponseBody
+    public String  loadParkingRecordPrint(String memberUUid){
+        ArrayList<ParkingRecordBean> parkingRecordBeans;
+        ResponseObj<ArrayList<ParkingRecordBean>> result = new ResponseObj<>();
+        try {
+            log.info(memberUUid);
+            parkingRecordBeans = parkingService.loadParkingRecordByMemberPrint(memberUUid);
 
             if (!DataUtils.isEmpty(parkingRecordBeans)){
                 result.setCode(ResponseObj.OK);
                 result.setData(parkingRecordBeans);
-                result.setMsg("add success");
+            }
+            else {
+
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please check if the s exists!!");
+            }
+        }catch (Exception e){
+
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
+    }
+
+    @RequestMapping(value = "parkingRecordByUUID.p" )
+    @ResponseBody
+    public String  loadParkingRecordForUUID(String memberUUid){
+        ArrayList<ParkingRecordBean> parkingRecordBeans;
+        ResponseObj<ArrayList<ParkingRecordBean>> result = new ResponseObj<>();
+        try {
+            log.info(memberUUid);
+            parkingRecordBeans = parkingService.loadParkingRecordForUUID(memberUUid);
+
+            if (!DataUtils.isEmpty(parkingRecordBeans)){
+                result.setCode(ResponseObj.OK);
+                result.setData(parkingRecordBeans);
             }
             else {
 

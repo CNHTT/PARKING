@@ -36,5 +36,9 @@ public interface ParkingService {
 
     boolean addParkingRecordEntryList(ArrayList<ParkingRecordBean> parkingRecordBeans);
 
-    ArrayList<ParkingLotBean> loadParkingRecordByMember(String memberUUid);
+    ArrayList<ParkingRecordBean> loadParkingRecordByMember(String memberUUid);
+
+    ArrayList<ParkingRecordBean> loadParkingRecordByMemberPrint(String memberUUid);
+
+    ArrayList<ParkingRecordBean> loadParkingRecordForUUID(String memberUUid);
 }

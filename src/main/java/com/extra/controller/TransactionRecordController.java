@@ -3,7 +3,9 @@ package com.extra.controller;
 import com.extra.model.*;
 import com.extra.model.response.ResponseObj;
 import com.extra.model.response.ResponsePage;
+import com.extra.service.ParkingService;
 import com.extra.service.TransactionService;
+import com.extra.utils.DataUtils;
 import com.extra.utils.GsonUtils;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.stereotype.Controller;
@@ -31,6 +33,8 @@ public class TransactionRecordController extends BaseController {
 
     @Resource
     private TransactionService transactionService;
+    @Resource
+    private ParkingService parkingService;
 
 
     @RequestMapping("recharge_page")
@@ -47,6 +51,60 @@ public class TransactionRecordController extends BaseController {
         mode.addAttribute("page",page);
         return "cost-recharge";
     }
+
+
+
+    @RequestMapping("rechargeRecordList.p")
+    @ResponseBody
+    public String showRechargeRecordListByUUID(HttpServletRequest req,ModelMap model,String UUID){
+        log.info(UUID);
+        ArrayList<RechargeBean> rechargeBeans;
+        ResponseObj<ArrayList<RechargeBean>> result = new ResponseObj<>();
+        try {
+            rechargeBeans = transactionService.loadRechargeRecordList(UUID);
+
+            if (!DataUtils.isEmpty(rechargeBeans)){
+                result.setCode(ResponseObj.OK);
+                result.setData(rechargeBeans);
+            }
+            else {
+
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please check if the s exists!!");
+            }
+        }catch (Exception e){
+
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
+    }
+    @RequestMapping("rechargeRecordListByM.p")
+    @ResponseBody
+    public String showRechargeRecordListByM(HttpServletRequest req,ModelMap model,String UUID){
+        log.info(UUID);
+        ArrayList<RechargeBean> rechargeBeans;
+        ResponseObj<ArrayList<RechargeBean>> result = new ResponseObj<>();
+        try {
+            rechargeBeans = transactionService.loadRechargeRecordListByM(UUID);
+
+            if (!DataUtils.isEmpty(rechargeBeans)){
+                result.setCode(ResponseObj.OK);
+                result.setData(rechargeBeans);
+            }
+            else {
+
+                result.setCode(ResponseObj.EMPUTY);
+                result.setMsg("Please check if the s exists!!");
+            }
+        }catch (Exception e){
+
+            result.setCode(ResponseObj.FAILED);
+            result.setMsg(e.toString());
+        }
+        return new GsonUtils().toJson(result);
+    }
+
 
 
     @RequestMapping("recharge.lpm")
@@ -141,13 +199,18 @@ public class TransactionRecordController extends BaseController {
 
     @RequestMapping("consumption.p")
     @ResponseBody
-    public String addConsumptionRecord(String data){
+    public String addConsumptionRecord(String data,String parking){
         ResponseObj<ConsumptionBean> result = new ResponseObj<>();
         ConsumptionBean consumptionBean;
+        ParkingRecordBean parkingRecordBean;
         try {
             log.info(data);
+            parkingRecordBean = new GsonUtils().toBean(parking,ParkingRecordBean.class);
             consumptionBean = new GsonUtils().toBean(data,ConsumptionBean.class);
             if (transactionService.addConsumption(consumptionBean)){
+                transactionService.upConsumptionBean(parkingRecordBean.getAmount(),consumptionBean.getMemberUuid());
+                parkingService.addParkingRecordBean(parkingRecordBean);
+
                 result.setCode(ResponseObj.OK);
                 result.setMsg("add success");
             }

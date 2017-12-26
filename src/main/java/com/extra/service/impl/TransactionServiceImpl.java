@@ -2,6 +2,7 @@ package com.extra.service.impl;
 
 import com.extra.dao.TransactionDao;
 import com.extra.model.ConsumptionBean;
+import com.extra.model.ParkingRecordBean;
 import com.extra.model.RechargeBean;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.TransactionService;
@@ -67,5 +68,25 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void updateAmount(Double amount, String memberUuid) {
         transactionDao.updateAmount(amount,memberUuid);
+    }
+
+    @Override
+    public void upConsumptionBean(double v, String memberUuid) {
+        transactionDao.upConsumptionAmount(v,memberUuid);
+    }
+
+    @Override
+    public void updateParkingRecordBean(ParkingRecordBean parkingRecordBean) {
+        transactionDao.updateParkingRecord(parkingRecordBean);
+    }
+
+    @Override
+    public ArrayList<RechargeBean> loadRechargeRecordList(String companyUUID) {
+        return transactionDao.loadRechargeRecordList(companyUUID);
+    }
+
+    @Override
+    public ArrayList<RechargeBean> loadRechargeRecordListByM(String uuid) {
+        return transactionDao.loadRechargeRecordListByM(uuid);
     }
 }

@@ -14,5 +14,73 @@
     <select id="selectDeviceBySn" resultType="com.extra.model.DeviceBean">
         SELECT  * from park_device WHERE  company = #{companyUUID} AND  sn =#{sn}
     </select>
+    <select id="selectTotalParking" resultType="com.extra.model.StatisticsBean">
+        SELECT
+  COUNT(*) as parkingStatistics,
+  sum(amount) as parkingIncome,
+  (SELECT  COUNT(*) FROM park_recharge) as rechargeStatistics ,
+  (SELECT  COUNT(*) FROM park_member ) as user ,
+  (SELECT  COUNT(*) FROM park_manager) as administrator ,
+  (SELECT  sum(rAmount) FROM park_recharge) as rechargeIncome
+FROM park_parking
+    </select>
+    <select id="selectTodayParking" resultType="com.extra.model.StatisticsBean">
+SELECT
+  COUNT(*) as parkingStatistics,
+  sum(amount) as parkingIncome,
+  (SELECT  COUNT(*) FROM park_recharge WHERE  to_days(park_recharge.createTime)  = to_days(now())) as rechargeStatistics ,
+  (SELECT  COUNT(*) FROM park_member WHERE  to_days(park_member.createTime)  = to_days(now())) as user ,
+  (SELECT  COUNT(*) FROM park_manager WHERE  to_days(park_manager.CREATE_TIME)  = to_days(now())) as administrator ,
+  (SELECT  sum(rAmount) FROM park_recharge WHERE  to_days(park_recharge.createTime)  = to_days(now())) as rechargeIncome
+FROM park_parking
+WHERE  to_days(park_parking.createTime)  = to_days(now())
+    </select>
+    <select id="selectYesterdayParking" resultType="com.extra.model.StatisticsBean">
+SELECT
+  COUNT(*) as parkingStatistics,
+  sum(amount) as parkingIncome,
+  (SELECT  COUNT(*) FROM park_recharge WHERE  TO_DAYS( NOW( ) ) - TO_DAYS( createTime) = 1 ) as rechargeStatistics ,
+  (SELECT  COUNT(*) FROM park_member WHERE  TO_DAYS( NOW( ) ) - TO_DAYS( createTime) = 1 ) as user ,
+  (SELECT  COUNT(*) FROM park_manager WHERE  TO_DAYS( NOW( ) ) - TO_DAYS( CREATE_TIME) = 1  ) as administrator ,
+  (SELECT  sum(rAmount) FROM park_recharge WHERE  TO_DAYS( NOW( ) ) - TO_DAYS( createTime) = 1  ) as rechargeIncome
+FROM park_parking
+WHERE   TO_DAYS( NOW( ) ) - TO_DAYS( createTime) = 1
+    </select>
+    <select id="selectThisWeekParking" resultType="com.extra.model.StatisticsBean">
+SELECT
+  COUNT(*) as parkingStatistics,
+  sum(amount) as parkingIncome,
+  (SELECT  COUNT(*) FROM park_recharge WHERE   YEARWEEK(date_format(createTime,'%Y-%m-%d')) = YEARWEEK(now()) ) as rechargeStatistics ,
+  (SELECT  COUNT(*) FROM park_member WHERE   YEARWEEK(date_format(createTime,'%Y-%m-%d')) = YEARWEEK(now()) ) as user ,
+  (SELECT  COUNT(*) FROM park_manager WHERE  YEARWEEK(date_format(CREATE_TIME,'%Y-%m-%d')) = YEARWEEK(now())  ) as administrator ,
+  (SELECT  sum(rAmount) FROM park_recharge WHERE   YEARWEEK(date_format(createTime,'%Y-%m-%d')) = YEARWEEK(now())  ) as rechargeIncome
+FROM park_parking
+WHERE     date_format(createTime,'%Y-%m')=date_format(now(),'%Y-%m')
+    </select>
+    <select id="selectThisMonthParking" resultType="com.extra.model.StatisticsBean">
+SELECT
+  COUNT(*) as parkingStatistics,
+  sum(amount) as parkingIncome,
+  (SELECT  COUNT(*) FROM park_recharge WHERE    date_format(createTime,'%Y-%m')=date_format(now(),'%Y-%m') ) as rechargeStatistics ,
+  (SELECT  COUNT(*) FROM park_member WHERE   date_format(createTime,'%Y-%m')=date_format(now(),'%Y-%m') ) as user ,
+  (SELECT  COUNT(*) FROM park_manager WHERE   date_format(CREATE_TIME,'%Y-%m')=date_format(now(),'%Y-%m') ) as administrator ,
+  (SELECT  sum(rAmount) FROM park_recharge WHERE   date_format(createTime,'%Y-%m')=date_format(now(),'%Y-%m')  ) as rechargeIncome
+FROM park_parking
+WHERE      date_format(createTime,'%Y-%m')=date_format(now(),'%Y-%m')
+    </select>
+
+
+    <select id="selectDeviceCountFromCompany" parameterType="java.lang.String" resultType="java.lang.Integer" >
+        SELECT count(*) FROM  park_device WHERE  company = #{companyUuid}
+    </select>
+
+    <insert id="addDevice" parameterType="com.extra.model.DeviceBean">
+        <selectKey  keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            SELECT  LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO park_device(sn, number, uuid, company)
+        VALUES (#{sn},#{number},#{uuid},#{company})
+    </insert>
+
 
 </mapper>

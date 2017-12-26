@@ -27,7 +27,6 @@ public class ConsumptionBean implements Serializable {
     private  String deviceSN;
     private String deviceNumber;
     private String companyUuid;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date createTime;
 
 

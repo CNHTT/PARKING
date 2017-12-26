@@ -66,10 +66,10 @@
                     </c:if>
 
                     <td class="td-manage">
-                        <a style="text-decoration:none" onClick="admin_stop(this,'10001')" href="javascript:;" title="停用">
+                        <a  href="javascript:;" onClick="admin_stop(this,${a.UUID})" title="stop" style="text-decoration:none">
                             <i class="Hui-iconfont">&#xe631;</i>
                         </a>
-                        <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','1','800','500')" class="ml-5" style="text-decoration:none">
+                        <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','800','500')" class="ml-5" style="text-decoration:none">
                             <i class="Hui-iconfont">&#xe6df;</i></a>
                         <a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none">
                             <i class="Hui-iconfont">&#xe6e2;</i>
@@ -114,6 +114,32 @@
 <script type="text/javascript">
     function admin_add (title,url,w,h) {
         layer_show(title,url,w,h);
+    }
+
+    function admin_stop(obj,id) {
+        layer.confirm('Do you want to delete it ?',function(index){
+            $.ajax({
+                type: 'POST',
+                url: '',
+                dataType: 'json',
+                success: function(data){
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+                },
+                error:function(data) {
+                    console.log(data.msg);
+                },
+            });
+        });
+
+        function admin_del(obj,id) {
+            
+        }
+        
+        function admin_edit (title,url,w,h) {
+            
+        }
+
     }
 </script>
 </body>

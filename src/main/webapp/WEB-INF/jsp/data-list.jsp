@@ -22,12 +22,17 @@
     <i class="Hui-iconfont">&#xe67f;</i>
     HOME <span class="c-gray en">&gt;</span>
     Device Management <span class="c-gray en">&gt;</span>
-    Device List<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('${pageContext.request.contextPath}/admin_list');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    Device List<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace('${pageContext.request.contextPath}/data_list');" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 
 <div class="page-container">
 
     <!--显示总条数-->
     <div class="cl pd-5 bg-1 bk-gray mt-20">
+
+		<span class="l">
+            <a class="btn btn-primary radius" onclick="device_add('ADD DEVICE','add_device')" href="javascript:;">
+                <i class="Hui-iconfont">&#xe600;</i> ADD DEVICE</a>
+		</span>
         <span class="r">Total data：<strong>${page.total}</strong> SIZE</span>
     </div>
 
@@ -124,6 +129,17 @@
         layer_show(title,url,w,h);
     }
 
+    function device_add (obj,url) {
+        layer.open({
+            type:2,
+            area: ['300', '200'],
+            title:obj,
+            fixed: false, //不固定
+            content:url,
+            maxmin: true,
+            lang:'en'
+        });
+    }
 </script>
 </body>
 </html>

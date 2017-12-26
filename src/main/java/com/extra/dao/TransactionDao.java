@@ -1,6 +1,7 @@
 package com.extra.dao;
 
 import com.extra.model.ConsumptionBean;
+import com.extra.model.ParkingRecordBean;
 import com.extra.model.RechargeBean;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -24,4 +25,12 @@ public interface TransactionDao {
     int insertConsumptionList(ArrayList<ConsumptionBean> list);
 
     void updateAmount(@Param("amount") Double amount, @Param("uuid") String memberUuid);
+
+    void upConsumptionAmount(@Param("amount")double v,@Param("uuid") String memberUuid);
+
+    void updateParkingRecord(ParkingRecordBean parkingRecordBean);
+
+    ArrayList<RechargeBean> loadRechargeRecordList(String companyUUID);
+
+    ArrayList<RechargeBean> loadRechargeRecordListByM(String uuid);
 }

@@ -3,6 +3,7 @@ package com.extra.dao;
 import com.extra.model.CompanyInformationBean;
 import com.extra.model.CompanyLotBean;
 import com.extra.model.DeviceBean;
+import com.extra.model.StatisticsBean;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +21,18 @@ public interface HomeDao {
     ArrayList<DeviceBean> selectDeviceList(String companyUUID);
 
     DeviceBean selectDeviceBySn(@Param("sn") String sn,@Param("companyUUID") String companyUUID);
+
+    StatisticsBean selectTotalParking();
+
+    StatisticsBean selectTodayParking();
+
+    StatisticsBean selectYesterdayParking();
+
+    StatisticsBean selectThisWeekParking();
+
+    StatisticsBean selectThisMonthParking();
+
+    int selectDeviceCountFromCompany(String companyUUID);
+
+    void addDevice(DeviceBean deviceBean);
 }

@@ -2,10 +2,7 @@ package com.extra.service.impl;
 
 import com.extra.dao.HomeDao;
 import com.extra.dao.ParkingDao;
-import com.extra.model.CompanyInformationBean;
-import com.extra.model.CompanyLotBean;
-import com.extra.model.DeviceBean;
-import com.extra.model.ParkingLotBean;
+import com.extra.model.*;
 import com.extra.model.response.ResponsePage;
 import com.extra.service.HomeService;
 import com.extra.utils.BeanUtils;
@@ -50,6 +47,41 @@ public class HomeServiceImpl implements HomeService {
     @Override
     public DeviceBean loadDeviceBySn(String sn, String companyUUID) {
         return homeDao.selectDeviceBySn(sn,companyUUID);
+    }
+
+    @Override
+    public StatisticsBean getTotalParking() {
+        return homeDao.selectTotalParking();
+    }
+
+    @Override
+    public StatisticsBean getTodayParking() {
+        return homeDao.selectTodayParking();
+    }
+
+    @Override
+    public StatisticsBean getYesterdayParking() {
+        return homeDao.selectYesterdayParking();
+    }
+
+    @Override
+    public StatisticsBean getThisWeekParking() {
+        return homeDao.selectThisWeekParking() ;
+    }
+
+    @Override
+    public StatisticsBean getThisMonthParking() {
+        return homeDao.selectThisMonthParking();
+    }
+
+    @Override
+    public int getTotalNumber(String companyUUID) {
+        return homeDao.selectDeviceCountFromCompany(companyUUID);
+    }
+
+    @Override
+    public void addDevice(DeviceBean deviceBean) {
+        homeDao.addDevice(deviceBean);
     }
 
 }

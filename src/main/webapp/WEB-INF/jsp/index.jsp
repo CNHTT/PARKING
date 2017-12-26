@@ -20,7 +20,7 @@
 <body>
 <header class="navbar-wrapper">
     <div class="navbar navbar-fixed-top">
-        <div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="http://www.szfptech.com" target="_blank">SZFP TECH</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="http://www.szfptech.com" target="_blank">_parking</a>
+        <div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="http://www.szfptech.com" target="_blank">KVCS</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="http://www.szfptech.com" target="_blank">_parking</a>
             <span class="logo navbar-slogan f-l mr-10 hidden-xs">_parking</span>
             <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
             <nav class="nav navbar-nav">
@@ -77,9 +77,9 @@
             <dd>
                 <ul>
                     <li><a data-href="parking_records" data-title="Parking records" href="javascript:void(0)">Parking records</a></li>
-                    <li><a data-href="parking_undone" data-title="Undone record" href="javascript:void(0)">Unfinished record</a></li>
-                    <li><a data-href="parking_completed" data-title="Record completed" href="javascript:void(0)">Record completed</a></li>
-                    <li><a data-href="parking_abnormal" data-title="abnormal data" href="javascript:void(0)">abnormal data</a></li>
+                    <%--<li><a data-href="parking_undone" data-title="Undone record" href="javascript:void(0)">Unfinished record</a></li>--%>
+                    <%--<li><a data-href="parking_completed" data-title="Record completed" href="javascript:void(0)">Record completed</a></li>--%>
+                    <%--<li><a data-href="parking_abnormal" data-title="abnormal data" href="javascript:void(0)">abnormal data</a></li>--%>
                 </ul>
             </dd>
         </dl>

@@ -26,4 +26,8 @@ public interface MemberDao {
     ArrayList<MemberBean> selectMemberDelFromLPM(@Param("companyUUID") String companyUUID, @Param("lpm") String lpm);
 
     int insertMember(MemberBean memberBean);
+
+    void updateMember(String uuid);
+
+    MemberBean loadMemberFromCardId(String uuid);
 }

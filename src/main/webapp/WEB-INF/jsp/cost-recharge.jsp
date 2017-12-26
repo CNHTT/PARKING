@@ -77,8 +77,8 @@
                                 </u>
                             </td>
                             <td>${record.rAmount}</td>
-                            <td>${record.bAmount}</td>
                             <td>${record.aAmount}</td>
+                            <td>${record.bAmount}</td>
                             <td>${record.operateNumber}</td>
                             <td>${record.deviceNumber}</td>
                             <td>${record.createTime}</td>

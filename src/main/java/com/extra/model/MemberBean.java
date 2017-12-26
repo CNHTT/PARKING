@@ -25,7 +25,6 @@ public class MemberBean implements Serializable {
     private String companyUuid;
     private String  uuid;
     private String  addManagerUuid;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date createTime;
     private String cardId;
 

@@ -60,5 +60,15 @@ public class MemberServiceImpl implements MemberService {
         return memberDao.insertMember(memberBean)!=0;
     }
 
+    @Override
+    public void updateMember(String uuid) {
+         memberDao.updateMember(uuid);
+    }
+
+    @Override
+    public MemberBean loadMemberFromCardId(String uuid) {
+        return memberDao.loadMemberFromCardId(uuid);
+    }
+
 
 }

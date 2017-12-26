@@ -143,8 +143,15 @@
               park_parking.memberUuid,
               park_member.name as memberName,
               park_member.lpm  as memberLpm,
+              park_parking.operateUuid,
+              park_parking.memberUuid AS memberUuid,
+              park_manager.number as operateNumber,
+              park_device.number  as deviceNumber,
+              park_member.email as email,
+              park_member.phone as phone,
               park_parking.amount,
               enterTime,exitTime,
+              enterLongTime,
               parkingTime,
               parking_lot.number AS parkingLotName,
               park_parking.parkingUuid
@@ -152,7 +159,68 @@
             FROM park_parking LEFT OUTER JOIN park_member ON park_parking.memberUuid = park_member.uuid
 
               LEFT OUTER JOIN  parking_lot ON  park_parking.parkingUuid = parking_lot.uuid
-            WHERE park_parking.memberUuid = #{uuid} AND type = 1  ORDER BY park_parking.id DESC
+              LEFT OUTER JOIN  park_device ON  park_parking.deviceSn = park_device.sn
+              LEFT OUTER JOIN  park_manager ON  park_parking.operateUuid = park_manager.UUID
+            WHERE park_parking.memberUuid = #{uuid} and  to_days(park_parking.createTime)   = to_days(left(date_add(now(),INTERVAL -6 HOUR),20))  ORDER BY park_parking.id DESC  LIMIT 0, 10
+    </select>
+
+    <select id="selectParkingRecordByMemberPrintUUID" resultType="com.extra.model.ParkingRecordBean">
+     SELECT
+  park_parking.tsn,
+  park_parking.memberUuid,
+  park_member.name as memberName,
+  park_member.lpm  as memberLpm,
+  park_parking.operateUuid,
+  park_parking.memberUuid AS memberUuid,
+  park_manager.number as operateNumber,
+  park_device.number  as deviceNumber,
+  park_member.email as email,
+  park_member.phone as phone,
+  park_parking.amount,
+  enterTime,exitTime,
+  enterLongTime,
+  parkingTime,
+  parking_lot.number AS parkingLotName,
+  park_parking.parkingUuid,
+  park_consumption.aAmount,
+  park_consumption.bAmount
+
+FROM park_parking LEFT OUTER JOIN park_member ON park_parking.memberUuid = park_member.uuid
+
+  LEFT OUTER JOIN  parking_lot ON  park_parking.parkingUuid = parking_lot.uuid
+  LEFT OUTER JOIN  park_device ON  park_parking.deviceSn = park_device.sn
+  LEFT OUTER JOIN  park_manager ON  park_parking.operateUuid = park_manager.UUID
+  LEFT OUTER JOIN  park_consumption ON  park_parking.tsn = park_consumption.tsn
+WHERE park_parking.companyUuid = #{uuid}   ORDER BY park_parking.id DESC LIMIT 0, 10
+    </select>
+    <select id="loadParkingRecordForUUID" resultType="com.extra.model.ParkingRecordBean">
+     SELECT
+  park_parking.tsn,
+  park_parking.memberUuid,
+  park_member.name as memberName,
+  park_member.lpm  as memberLpm,
+  park_parking.operateUuid,
+  park_parking.memberUuid AS memberUuid,
+  park_manager.number as operateNumber,
+  park_device.number  as deviceNumber,
+  park_member.email as email,
+  park_member.phone as phone,
+  park_parking.amount,
+  enterTime,exitTime,
+  enterLongTime,
+  parkingTime,
+  parking_lot.number AS parkingLotName,
+  park_parking.parkingUuid,
+  park_consumption.aAmount,
+  park_consumption.bAmount
+
+FROM park_parking LEFT OUTER JOIN park_member ON park_parking.memberUuid = park_member.uuid
+
+  LEFT OUTER JOIN  parking_lot ON  park_parking.parkingUuid = parking_lot.uuid
+  LEFT OUTER JOIN  park_device ON  park_parking.deviceSn = park_device.sn
+  LEFT OUTER JOIN  park_manager ON  park_parking.operateUuid = park_manager.UUID
+  LEFT OUTER JOIN  park_consumption ON  park_parking.tsn = park_consumption.tsn
+WHERE park_parking.memberUuid = #{uuid}   ORDER BY park_parking.id DESC LIMIT 0, 10
     </select>
 
     <insert id="insertParkingRecord" parameterType="com.extra.model.ParkingRecordBean">

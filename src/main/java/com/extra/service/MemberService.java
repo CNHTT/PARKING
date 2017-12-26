@@ -20,4 +20,8 @@ public interface MemberService {
     ResponsePage<MemberBean> loadMemberDelFromLPM(String companyUUID, String lpm);
 
     boolean addMember(MemberBean memberBean);
+
+    void updateMember(String uuid);
+
+    MemberBean loadMemberFromCardId(String uuid);
 }

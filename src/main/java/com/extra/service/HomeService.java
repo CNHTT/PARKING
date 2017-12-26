@@ -1,9 +1,6 @@
 package com.extra.service;
 
-import com.extra.model.CompanyInformationBean;
-import com.extra.model.CompanyLotBean;
-import com.extra.model.DeviceBean;
-import com.extra.model.ParkingLotBean;
+import com.extra.model.*;
 import com.extra.model.response.ResponsePage;
 
 /**
@@ -19,4 +16,18 @@ public interface HomeService {
     ParkingLotBean loadParkingBy(String parkingUuid);
 
     DeviceBean loadDeviceBySn(String sn, String companyUUID);
+
+    StatisticsBean getTotalParking();
+
+    StatisticsBean getTodayParking();
+
+    StatisticsBean getYesterdayParking();
+
+    StatisticsBean getThisWeekParking();
+
+    StatisticsBean getThisMonthParking();
+
+    int getTotalNumber(String companyUUID);
+
+    void addDevice(DeviceBean deviceBean);
 }

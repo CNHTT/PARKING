@@ -24,6 +24,9 @@ public class ParkingRecordBean implements Serializable{
     private String deviceNumber;
     private String companyUuid;
 
+    private String phone;
+    private String email;
+
 
     private String parkingLotName;
     private String parkingUuid;
@@ -35,16 +38,34 @@ public class ParkingRecordBean implements Serializable{
     //驶出时间
     private long exitLongTime;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date enterTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date exitTime;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date createTime;
     private long parkingTime;
     private int intTime;
 
+
+
+
+
+
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getCompanyUuid() {
         return companyUuid;
@@ -73,6 +94,35 @@ public class ParkingRecordBean implements Serializable{
     public Long getId() {
         return id;
     }
+
+    private double rAmount;
+    private double bAmount;
+    private double aAmount;
+
+    public double getrAmount() {
+        return rAmount;
+    }
+
+    public void setrAmount(double rAmount) {
+        this.rAmount = rAmount;
+    }
+
+    public double getbAmount() {
+        return bAmount;
+    }
+
+    public void setbAmount(double bAmount) {
+        this.bAmount = bAmount;
+    }
+
+    public double getaAmount() {
+        return aAmount;
+    }
+
+    public void setaAmount(double aAmount) {
+        this.aAmount = aAmount;
+    }
+
 
     public void setId(Long id) {
         this.id = id;

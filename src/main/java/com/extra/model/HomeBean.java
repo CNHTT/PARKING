@@ -12,7 +12,6 @@ import java.util.List;
  */
 public class HomeBean {
     private int loginNum;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date time;
     private String ip;
 

@@ -19,7 +19,6 @@ public class ManagerBean implements Serializable {
     private String pwdSalt;
     private String site;
     private String cookie;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date createTime;
     private Date modifyTime;
     private String strTime;

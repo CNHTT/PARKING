@@ -21,7 +21,7 @@
 <body>
 
 <div class="page-container">
-    <p class="f-20 text-success">Welcome to SZFP Technology Limited parking management system</p>
+    <p class="f-20 text-success">Welcome to ${company.name} Parking management system</p>
     <p>Number of login：<%=home.getLoginNum()%></p>
     <p>Last login IP：<%=home.getIp()%>             Last Login Time：<%=home.getTime()%></p>
 
