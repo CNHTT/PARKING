@@ -66,7 +66,7 @@
                     </c:if>
 
                     <td class="td-manage">
-                        <a  href="javascript:;" onClick="admin_stop(this,${a.UUID})" title="stop" style="text-decoration:none">
+                        <a  href="javascript:;" onClick="admin_stop(this,'${a.UUID}')" title="stop" style="text-decoration:none">
                             <i class="Hui-iconfont">&#xe631;</i>
                         </a>
                         <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','800','500')" class="ml-5" style="text-decoration:none">
@@ -116,7 +116,7 @@
         layer_show(title,url,w,h);
     }
 
-    function admin_stop(obj,id) {
+    function admin_stop(obj,a) {
         layer.confirm('Do you want to delete it ?',function(index){
             $.ajax({
                 type: 'POST',
